@@ -24,6 +24,8 @@ interface Bot {
   nameEn: string;
   tags: string[];
   tagsEn: string[];
+  series?: string;
+  seriesEn?: string;
   universe: string;
   universeEn: string;
   gender: string;
@@ -101,6 +103,9 @@ function BotModal({ bot, lang, t, onClose }: BotModalProps) {
               <h2 className="modal-title">{lang === 'ru' ? bot.name : bot.nameEn}</h2>
               <div className="modal-meta">
                 <span className="meta-chip">{lang === 'ru' ? bot.universe : bot.universeEn}</span>
+                {(lang === 'ru' ? bot.series : bot.seriesEn) && (
+                  <span className="meta-chip">{lang === 'ru' ? bot.series : bot.seriesEn}</span>
+                )}
                 <span className="meta-chip meta-chip-gender">{lang === 'ru' ? bot.gender : bot.genderEn}</span>
               </div>
               <div className="modal-tags">
@@ -189,6 +194,7 @@ export default function Bots() {
   const [bots, setBots] = useState<Bot[]>([]);
   const [search, setSearch] = useState('');
   const [filterGender, setFilterGender] = useState('');
+  const [filterSeries, setFilterSeries] = useState('');
   const [filterUniverse, setFilterUniverse] = useState('');
   const [filterTag, setFilterTag] = useState('');
   const [selectedBot, setSelectedBot] = useState<Bot | null>(null);
@@ -201,16 +207,19 @@ export default function Bots() {
   }, []);
 
   const universes = [...new Set(bots.map(b => lang === 'ru' ? b.universe : b.universeEn))];
+  const series = [...new Set(bots.map(b => lang === 'ru' ? b.series : b.seriesEn).filter(Boolean))];
   const allTags = [...new Set(bots.flatMap(b => lang === 'ru' ? b.tags : b.tagsEn))];
 
   const filtered = bots.filter(bot => {
     const name = lang === 'ru' ? bot.name : bot.nameEn;
     const tags = lang === 'ru' ? bot.tags : bot.tagsEn;
+    const series = lang === 'ru' ? bot.series : bot.seriesEn;
     const universe = lang === 'ru' ? bot.universe : bot.universeEn;
     const gender = lang === 'ru' ? bot.gender : bot.genderEn;
 
     if (search && !name.toLowerCase().includes(search.toLowerCase())) return false;
     if (filterGender && gender !== filterGender) return false;
+    if (filterSeries && series !== filterSeries) return false;
     if (filterUniverse && universe !== filterUniverse) return false;
     if (filterTag && !tags.includes(filterTag)) return false;
     return true;
@@ -261,6 +270,17 @@ export default function Bots() {
 
         <select
           className="filter-select"
+          value={filterSeries}
+          onChange={e => setFilterSeries(e.target.value)}
+        >
+          <option value="">{t.bots.filterSeries}: {t.bots.all}</option>
+          {series.map(s => (
+            <option key={s} value={s}>{s}</option>
+          ))}
+        </select>
+
+        <select
+          className="filter-select"
           value={filterTag}
           onChange={e => setFilterTag(e.target.value)}
         >
@@ -297,7 +317,9 @@ export default function Bots() {
                 </div>
                 <div className="polaroid-caption">
                   <span className="polaroid-label">{lang === 'ru' ? bot.name : bot.nameEn}</span>
-                  <span className="polaroid-sub">{lang === 'ru' ? bot.universe : bot.universeEn}</span>
+                  <span className="polaroid-sub">
+                    {(lang === 'ru' ? bot.series : bot.seriesEn) || (lang === 'ru' ? bot.universe : bot.universeEn)}
+                  </span>
                   <div className="bot-tags-preview">
                     {(lang === 'ru' ? bot.tags : bot.tagsEn).slice(0, 2).map(tag => (
                       <span key={tag} className="tag tag-small">{tag}</span>

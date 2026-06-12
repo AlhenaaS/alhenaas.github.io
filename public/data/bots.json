@@ -5,6 +5,8 @@
     "nameEn": "Example Bot",
     "tags": ["фэнтези", "романтика", "приключения"],
     "tagsEn": ["fantasy", "romance", "adventure"],
+    "series": "Пример серии",
+    "seriesEn": "Example Series",
     "universe": "Оригинальная вселенная",
     "universeEn": "Original Universe",
     "gender": "мужской",
