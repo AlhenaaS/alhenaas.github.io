@@ -599,7 +599,6 @@ body::before {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
   min-width: 142px;
   transition: border-color 0.2s, color 0.2s, background 0.2s;
 }
@@ -609,16 +608,6 @@ body::before {
   border-color: var(--accent-soft);
   color: var(--text);
   background: var(--bg-secondary);
-}
-
-.filters-toggle-icon {
-  font-size: 0.9rem;
-  line-height: 1;
-  transition: transform 0.2s;
-}
-
-.filters-toggle-active .filters-toggle-icon {
-  transform: rotate(180deg);
 }
 
 .filters-panel {

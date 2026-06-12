@@ -255,7 +255,6 @@ export default function Bots() {
             onClick={() => setFiltersOpen(open => !open)}
           >
             <span>{filtersOpen ? t.bots.hideFilters : t.bots.showFilters}</span>
-            <span className="filters-toggle-icon" aria-hidden="true">⌄</span>
           </button>
         </div>
 
