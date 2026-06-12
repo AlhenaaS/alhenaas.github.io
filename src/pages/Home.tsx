@@ -6,7 +6,9 @@ interface HomeProps {
 }
 
 export default function Home({ setPage }: HomeProps) {
-  const { t } = useApp();
+  const { t, lang } = useApp();
+  const aboutImage = siteContent.home.aboutImage.src || siteContent.images.placeholders.about;
+  const aboutImageClassName = siteContent.home.aboutImage.src ? 'about-img' : 'about-img about-img-placeholder';
 
   return (
     <main className="home-page">
@@ -59,23 +61,7 @@ export default function Home({ setPage }: HomeProps) {
       <section className="about-section">
         <div className="polaroid polaroid-about">
           <div className="polaroid-img-area">
-            <div className="polaroid-placeholder-art">
-              <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
-                <circle cx="50" cy="50" r="6" fill="currentColor" opacity="0.7"/>
-                <circle cx="22" cy="30" r="4" fill="currentColor" opacity="0.5"/>
-                <circle cx="78" cy="28" r="4" fill="currentColor" opacity="0.5"/>
-                <circle cx="15" cy="62" r="4" fill="currentColor" opacity="0.5"/>
-                <circle cx="85" cy="65" r="4" fill="currentColor" opacity="0.5"/>
-                <circle cx="50" cy="82" r="4" fill="currentColor" opacity="0.5"/>
-                <circle cx="35" cy="12" r="3" fill="currentColor" opacity="0.35"/>
-                <circle cx="68" cy="74" r="3" fill="currentColor" opacity="0.35"/>
-                <line x1="22" y1="30" x2="50" y2="50" stroke="currentColor" strokeWidth="1.2" opacity="0.25"/>
-                <line x1="78" y1="28" x2="50" y2="50" stroke="currentColor" strokeWidth="1.2" opacity="0.25"/>
-                <line x1="15" y1="62" x2="50" y2="50" stroke="currentColor" strokeWidth="1.2" opacity="0.25"/>
-                <line x1="85" y1="65" x2="50" y2="50" stroke="currentColor" strokeWidth="1.2" opacity="0.25"/>
-                <line x1="50" y1="82" x2="50" y2="50" stroke="currentColor" strokeWidth="1.2" opacity="0.25"/>
-              </svg>
-            </div>
+            <img src={aboutImage} alt={siteContent.home.aboutImage.alt[lang]} className={aboutImageClassName} />
           </div>
           <div className="polaroid-caption">
             <p className="about-text">{t.home.about}</p>

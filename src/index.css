@@ -435,9 +435,20 @@ body::before {
   aspect-ratio: 4/3;
 }
 
-.polaroid-placeholder-art {
-  color: var(--accent);
-  opacity: 0.6;
+.about-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: var(--sepia-filter);
+  display: block;
+}
+
+.about-img-placeholder {
+  width: 42%;
+  height: 42%;
+  object-fit: contain;
+  filter: none;
+  opacity: 0.68;
 }
 
 .about-text {
@@ -607,13 +618,12 @@ body::before {
   display: block;
 }
 
-.bot-img-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-muted);
+.bot-img-placeholder-img {
+  width: 40%;
+  height: 40%;
+  object-fit: contain;
+  filter: none;
+  opacity: 0.5;
 }
 
 .alt-badge {
@@ -758,14 +768,12 @@ body::before {
   filter: var(--sepia-filter);
 }
 
-.modal-img-placeholder {
-  color: var(--text-muted);
+.modal-img-placeholder-img {
+  width: 34%;
+  height: 34%;
+  object-fit: contain;
+  filter: none;
   opacity: 0.5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
 }
 
 .modal-info {
@@ -1000,7 +1008,10 @@ body::before {
 }
 
 .alt-img-placeholder-mini {
-  color: var(--text-muted);
+  width: 45%;
+  height: 45%;
+  object-fit: contain;
+  filter: none;
   opacity: 0.5;
 }
 

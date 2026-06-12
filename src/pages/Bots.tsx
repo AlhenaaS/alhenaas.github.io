@@ -44,23 +44,16 @@ interface AltModalProps {
 }
 
 function AltModal({ alt, lang, t, onClose }: AltModalProps) {
+  const altImage = alt.image || siteContent.images.placeholders.modal;
+  const altImageClassName = alt.image ? 'modal-img' : 'modal-img modal-img-placeholder-img';
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-card" onClick={e => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose}>✕</button>
         <div className="modal-polaroid">
           <div className="modal-img-area">
-            {alt.image ? (
-              <img src={alt.image} alt={lang === 'ru' ? alt.name : alt.nameEn} className="modal-img" />
-            ) : (
-              <div className="modal-img-placeholder">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/>
-                  <circle cx="8.5" cy="8.5" r="1.5"/>
-                  <polyline points="21 15 16 10 5 21"/>
-                </svg>
-              </div>
-            )}
+            <img src={altImage} alt={lang === 'ru' ? alt.name : alt.nameEn} className={altImageClassName} />
           </div>
           <div className="modal-info">
             <div className="modal-alt-badge">{t.bots.altLabel}</div>
@@ -91,6 +84,8 @@ interface BotModalProps {
 
 function BotModal({ bot, lang, t, onClose }: BotModalProps) {
   const [activeAlt, setActiveAlt] = useState<Alt | null>(null);
+  const botImage = bot.image || siteContent.images.placeholders.modal;
+  const botImageClassName = bot.image ? 'modal-img' : 'modal-img modal-img-placeholder-img';
 
   return (
     <>
@@ -99,17 +94,7 @@ function BotModal({ bot, lang, t, onClose }: BotModalProps) {
           <button className="modal-close" onClick={onClose}>✕</button>
           <div className="modal-polaroid">
             <div className="modal-img-area">
-              {bot.image ? (
-                <img src={bot.image} alt={lang === 'ru' ? bot.name : bot.nameEn} className="modal-img" />
-              ) : (
-                <div className="modal-img-placeholder">
-                  <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <rect x="3" y="3" width="18" height="18" rx="2"/>
-                    <circle cx="8.5" cy="8.5" r="1.5"/>
-                    <polyline points="21 15 16 10 5 21"/>
-                  </svg>
-                </div>
-              )}
+              <img src={botImage} alt={lang === 'ru' ? bot.name : bot.nameEn} className={botImageClassName} />
             </div>
 
             <div className="modal-info">
@@ -159,28 +144,26 @@ function BotModal({ bot, lang, t, onClose }: BotModalProps) {
                 <div className="modal-section">
                   <h3 className="modal-section-title">{t.bots.alts}</h3>
                   <div className="alts-list">
-                    {bot.alts.map(alt => (
-                      <button
-                        key={alt.id}
-                        className="alt-card"
-                        onClick={() => setActiveAlt(alt)}
-                      >
-                        <div className="alt-polaroid-mini">
-                          {alt.image ? (
-                            <img src={alt.image} alt={lang === 'ru' ? alt.name : alt.nameEn} className="alt-img-mini" />
-                          ) : (
-                            <div className="alt-img-placeholder-mini">
-                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                                <circle cx="8.5" cy="8.5" r="1.5"/>
-                                <polyline points="21 15 16 10 5 21"/>
-                              </svg>
-                            </div>
-                          )}
-                        </div>
-                        <span className="alt-name">{lang === 'ru' ? alt.name : alt.nameEn}</span>
-                      </button>
-                    ))}
+                    {bot.alts.map(alt => {
+                      const altMiniImage = alt.image || siteContent.images.placeholders.altMini;
+
+                      return (
+                        <button
+                          key={alt.id}
+                          className="alt-card"
+                          onClick={() => setActiveAlt(alt)}
+                        >
+                          <div className="alt-polaroid-mini">
+                            <img
+                              src={altMiniImage}
+                              alt={lang === 'ru' ? alt.name : alt.nameEn}
+                              className={alt.image ? 'alt-img-mini' : 'alt-img-mini alt-img-placeholder-mini'}
+                            />
+                          </div>
+                          <span className="alt-name">{lang === 'ru' ? alt.name : alt.nameEn}</span>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -292,40 +275,38 @@ export default function Bots() {
         <div className="no-results">{t.bots.noResults}</div>
       ) : (
         <div className="bots-grid">
-          {filtered.map((bot, i) => (
-            <button
-              key={bot.id}
-              className="polaroid polaroid-bot"
-              style={{ '--tilt': `${(i % 3 === 0 ? -1 : i % 3 === 1 ? 1 : -0.5) * 1.2}deg` } as React.CSSProperties}
-              onClick={() => setSelectedBot(bot)}
-            >
-              <div className="polaroid-img-area bot-img-area">
-                {bot.image ? (
-                  <img src={bot.image} alt={lang === 'ru' ? bot.name : bot.nameEn} className="bot-img" />
-                ) : (
-                  <div className="bot-img-placeholder">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <rect x="3" y="3" width="18" height="18" rx="2"/>
-                      <circle cx="8.5" cy="8.5" r="1.5"/>
-                      <polyline points="21 15 16 10 5 21"/>
-                    </svg>
-                  </div>
-                )}
-                {bot.alts && bot.alts.length > 0 && (
-                  <div className="alt-badge">{siteContent.bots.altBadgePrefix}{bot.alts.length}</div>
-                )}
-              </div>
-              <div className="polaroid-caption">
-                <span className="polaroid-label">{lang === 'ru' ? bot.name : bot.nameEn}</span>
-                <span className="polaroid-sub">{lang === 'ru' ? bot.universe : bot.universeEn}</span>
-                <div className="bot-tags-preview">
-                  {(lang === 'ru' ? bot.tags : bot.tagsEn).slice(0, 2).map(tag => (
-                    <span key={tag} className="tag tag-small">{tag}</span>
-                  ))}
+          {filtered.map((bot, i) => {
+            const botPreviewImage = bot.image || siteContent.images.placeholders.bot;
+
+            return (
+              <button
+                key={bot.id}
+                className="polaroid polaroid-bot"
+                style={{ '--tilt': `${(i % 3 === 0 ? -1 : i % 3 === 1 ? 1 : -0.5) * 1.2}deg` } as React.CSSProperties}
+                onClick={() => setSelectedBot(bot)}
+              >
+                <div className="polaroid-img-area bot-img-area">
+                  <img
+                    src={botPreviewImage}
+                    alt={lang === 'ru' ? bot.name : bot.nameEn}
+                    className={bot.image ? 'bot-img' : 'bot-img bot-img-placeholder-img'}
+                  />
+                  {bot.alts && bot.alts.length > 0 && (
+                    <div className="alt-badge">{siteContent.bots.altBadgePrefix}{bot.alts.length}</div>
+                  )}
                 </div>
-              </div>
-            </button>
-          ))}
+                <div className="polaroid-caption">
+                  <span className="polaroid-label">{lang === 'ru' ? bot.name : bot.nameEn}</span>
+                  <span className="polaroid-sub">{lang === 'ru' ? bot.universe : bot.universeEn}</span>
+                  <div className="bot-tags-preview">
+                    {(lang === 'ru' ? bot.tags : bot.tagsEn).slice(0, 2).map(tag => (
+                      <span key={tag} className="tag tag-small">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              </button>
+            );
+          })}
         </div>
       )}
 

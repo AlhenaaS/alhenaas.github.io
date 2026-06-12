@@ -15,10 +15,26 @@ export const siteContent = {
 
   home: {
     aboutCaption: 'alhenas, 2025',
+    aboutImage: {
+      src: '',
+      alt: {
+        ru: 'Портрет alhenas',
+        en: 'Portrait of alhenas',
+      },
+    },
+  },
+
+  images: {
+    placeholders: {
+      about: './images/placeholders/about.svg',
+      bot: './images/placeholders/image.svg',
+      modal: './images/placeholders/image.svg',
+      altMini: './images/placeholders/image.svg',
+    },
   },
 
   socialLinks: [
-    { label: 'Telegram', url: 't.me/alhenasrambling', color: '#229ED9', icon: 'tg' },
+    { label: 'Telegram', url: 'https://t.me/alhenasrambling', color: '#229ED9', icon: 'tg' },
     { label: 'Boosty', url: 'https://boosty.to/alhenasrambling', color: '#f15f2b', icon: 'boosty' },
     { label: 'Janitor', url: 'https://janitorai.com/profiles/0aacb4b5-6102-4f0e-8eaa-4cf2422f2b67_profile-of-alhena-s', color: '#9b6fa6', icon: 'chub' },
     { label: 'GitHub', url: 'https://github.com/AlhenaaS', color: '#333', icon: 'gh' },

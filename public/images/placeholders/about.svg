@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g fill="#8b7d74" opacity="0.68">
+    <circle cx="50" cy="50" r="6" />
+    <circle cx="22" cy="30" r="4" opacity="0.72" />
+    <circle cx="78" cy="28" r="4" opacity="0.72" />
+    <circle cx="15" cy="62" r="4" opacity="0.72" />
+    <circle cx="85" cy="65" r="4" opacity="0.72" />
+    <circle cx="50" cy="82" r="4" opacity="0.72" />
+    <circle cx="35" cy="12" r="3" opacity="0.5" />
+    <circle cx="68" cy="74" r="3" opacity="0.5" />
+  </g>
+  <g stroke="#8b7d74" stroke-width="1.2" opacity="0.35">
+    <line x1="22" y1="30" x2="50" y2="50" />
+    <line x1="78" y1="28" x2="50" y2="50" />
+    <line x1="15" y1="62" x2="50" y2="50" />
+    <line x1="85" y1="65" x2="50" y2="50" />
+    <line x1="50" y1="82" x2="50" y2="50" />
+  </g>
+</svg>
