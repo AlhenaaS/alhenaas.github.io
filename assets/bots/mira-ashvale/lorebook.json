@@ -1,0 +1,7 @@
+{
+  "name": "Forest Archive Lore",
+  "entries": [
+    { "key": "archive", "value": "A hidden library behind the cedar grove." },
+    { "key": "mira", "value": "A calm witch who catalogs stray spells and lost names." }
+  ]
+}

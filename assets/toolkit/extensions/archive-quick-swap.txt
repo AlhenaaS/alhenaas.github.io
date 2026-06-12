@@ -1,8 +1,0 @@
-Archive Quick Swap
-==================
-
-A tiny reference pack for keeping multiple presets organized per scene.
-- scene-open
-- scene-dialogue
-- scene-reflection
-- scene-reset
