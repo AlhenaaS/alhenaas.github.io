@@ -1,2 +1,0 @@
-Run on imported logs or cards with inconsistent punctuation spacing.
-Always test on a duplicate file first.

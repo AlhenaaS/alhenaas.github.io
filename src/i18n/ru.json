@@ -1,0 +1,56 @@
+{
+  "nav": {
+    "home": "Главная",
+    "bots": "Боты",
+    "tavern": "Таверна",
+    "langSwitch": "EN"
+  },
+  "home": {
+    "greeting": "добро пожаловать",
+    "subtitle": "коллекция персонажей и наработок для SillyTavern",
+    "exploreBtn": "смотреть ботов",
+    "tavernBtn": "ресурсы таверны",
+    "about": "привет! я alhenas — создаю персонажей для ролевых игр в SillyTavern. здесь собраны мои боты, лорбуки, пресеты и прочие полезности.",
+    "constellation": "созвездие водолея"
+  },
+  "bots": {
+    "title": "боты",
+    "subtitle": "коллекция персонажей",
+    "search": "поиск по имени...",
+    "filterGender": "пол",
+    "filterUniverse": "вселенная",
+    "filterTag": "тег",
+    "all": "все",
+    "noResults": "ничего не найдено",
+    "download": "скачать бота",
+    "lorebooks": "лорбуки",
+    "downloadLorebook": "скачать",
+    "alts": "альт-версии",
+    "altLabel": "альт",
+    "downloadAlt": "скачать альт",
+    "close": "закрыть",
+    "noLink": "ссылка недоступна",
+    "male": "мужской",
+    "female": "женский",
+    "nonbinary": "небинарный",
+    "any": "любой"
+  },
+  "tavern": {
+    "title": "таверна",
+    "subtitle": "ресурсы и наработки",
+    "presets": "пресеты",
+    "extensions": "расширения",
+    "regex": "регексы",
+    "tutorials": "туториалы",
+    "other": "прочее",
+    "download": "скачать",
+    "viewRepo": "репозиторий",
+    "readMore": "читать",
+    "version": "версия"
+  },
+  "footer": {
+    "madeBy": "сделано с ♡ alhenas",
+    "links": "мои ссылки",
+    "rights": "все права сохранены"
+  }
+}

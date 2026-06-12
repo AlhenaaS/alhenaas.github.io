@@ -1,0 +1,55 @@
+{
+  "presets": [
+    {
+      "id": "preset-1",
+      "name": "Основной пресет",
+      "nameEn": "Main Preset",
+      "description": "Мой основной пресет для SillyTavern. Оптимизирован для ролевых игр.",
+      "descriptionEn": "My main SillyTavern preset. Optimized for roleplay.",
+      "downloadUrl": "",
+      "version": "1.0"
+    }
+  ],
+  "extensions": [
+    {
+      "id": "ext-1",
+      "name": "Расширение для атмосферы",
+      "nameEn": "Atmosphere Extension",
+      "description": "Расширение добавляет атмосферные эффекты в чат.",
+      "descriptionEn": "Extension that adds atmospheric effects to chat.",
+      "downloadUrl": "",
+      "repoUrl": ""
+    }
+  ],
+  "regex": [
+    {
+      "id": "regex-1",
+      "name": "Набор регулярных выражений",
+      "nameEn": "Regex Pack",
+      "description": "Набор регексов для форматирования текста в SillyTavern.",
+      "descriptionEn": "A set of regex for text formatting in SillyTavern.",
+      "downloadUrl": ""
+    }
+  ],
+  "tutorials": [
+    {
+      "id": "tut-1",
+      "name": "Как начать работу с SillyTavern",
+      "nameEn": "How to get started with SillyTavern",
+      "description": "Пошаговый туториал для новичков.",
+      "descriptionEn": "Step-by-step tutorial for beginners.",
+      "url": "",
+      "type": "guide"
+    }
+  ],
+  "other": [
+    {
+      "id": "other-1",
+      "name": "Разное",
+      "nameEn": "Miscellaneous",
+      "description": "Прочие полезные материалы.",
+      "descriptionEn": "Other useful materials.",
+      "downloadUrl": ""
+    }
+  ]
+}

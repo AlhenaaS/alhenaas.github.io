@@ -1,5 +1,0 @@
-Pattern: /\s+([,.;!?])/g
-Replace: $1
-
-Pattern: /"\s+/g
-Replace: "

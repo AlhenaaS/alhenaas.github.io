@@ -1,0 +1,56 @@
+{
+  "nav": {
+    "home": "Home",
+    "bots": "Bots",
+    "tavern": "Tavern",
+    "langSwitch": "RU"
+  },
+  "home": {
+    "greeting": "welcome",
+    "subtitle": "a collection of characters and resources for SillyTavern",
+    "exploreBtn": "explore bots",
+    "tavernBtn": "tavern resources",
+    "about": "hey! i'm alhenas — i create characters for roleplay in SillyTavern. here you'll find my bots, lorebooks, presets and other useful stuff.",
+    "constellation": "aquarius constellation"
+  },
+  "bots": {
+    "title": "bots",
+    "subtitle": "character collection",
+    "search": "search by name...",
+    "filterGender": "gender",
+    "filterUniverse": "universe",
+    "filterTag": "tag",
+    "all": "all",
+    "noResults": "nothing found",
+    "download": "download bot",
+    "lorebooks": "lorebooks",
+    "downloadLorebook": "download",
+    "alts": "alt versions",
+    "altLabel": "alt",
+    "downloadAlt": "download alt",
+    "close": "close",
+    "noLink": "link unavailable",
+    "male": "male",
+    "female": "female",
+    "nonbinary": "nonbinary",
+    "any": "any"
+  },
+  "tavern": {
+    "title": "tavern",
+    "subtitle": "resources & tools",
+    "presets": "presets",
+    "extensions": "extensions",
+    "regex": "regex packs",
+    "tutorials": "tutorials",
+    "other": "other",
+    "download": "download",
+    "viewRepo": "repository",
+    "readMore": "read more",
+    "version": "version"
+  },
+  "footer": {
+    "madeBy": "made with ♡ by alhenas",
+    "links": "my links",
+    "rights": "all rights reserved"
+  }
+}

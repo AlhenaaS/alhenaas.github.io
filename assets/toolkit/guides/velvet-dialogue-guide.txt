@@ -1,3 +1,0 @@
-Use when you want responses to feel descriptive but not purple.
-- Best for fantasy, modern slice-of-life, and quiet romance.
-- Pair with a medium temperature.

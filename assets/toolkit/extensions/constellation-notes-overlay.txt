@@ -1,7 +1,0 @@
-Constellation Notes Overlay
-===========================
-
-Concept notes for a lightweight reminder system:
-• emotional cue lane
-• unresolved thread marker
-• pair/twin relationship notes

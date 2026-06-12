@@ -1,8 +1,0 @@
-Vintage Theme Swatches
-======================
-
-paper-cream: #FAF6F1
-sage-muted: #7B8F6A
-alhena-coral: #C45B4A
-brass-amber: #C4956A
-warm-charcoal: #2C2520

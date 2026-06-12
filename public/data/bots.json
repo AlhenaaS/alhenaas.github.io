@@ -1,0 +1,35 @@
+[
+  {
+    "id": "example-bot",
+    "name": "Пример бота",
+    "nameEn": "Example Bot",
+    "tags": ["фэнтези", "романтика", "приключения"],
+    "tagsEn": ["fantasy", "romance", "adventure"],
+    "universe": "Оригинальная вселенная",
+    "universeEn": "Original Universe",
+    "gender": "мужской",
+    "genderEn": "male",
+    "description": "Это пример описания бота. Здесь можно написать подробную предысторию персонажа, его характер, особенности и всё что угодно. Он появился из ниоткуда и теперь здесь.",
+    "descriptionEn": "This is an example bot description. Here you can write a detailed backstory, personality, traits and everything else. He appeared from nowhere and now he is here.",
+    "image": "",
+    "downloadUrl": "",
+    "lorebooks": [
+      {
+        "name": "Лорбук мира",
+        "nameEn": "World Lorebook",
+        "url": ""
+      }
+    ],
+    "alts": [
+      {
+        "id": "example-bot-alt1",
+        "name": "Альт версия — Злодей",
+        "nameEn": "Alt version — Villain",
+        "description": "Тёмная версия персонажа. Всё то же самое, но мрачнее и жестче.",
+        "descriptionEn": "The dark version of the character. Same as before, but darker and more brutal.",
+        "image": "",
+        "downloadUrl": ""
+      }
+    ]
+  }
+]

@@ -1,2 +1,0 @@
-Designed for longer roleplay sessions.
-Store emotional state, recent objective, and unresolved thread in separate lines.

@@ -1,6 +1,0 @@
-{
-  "name": "Velvet Dialogue",
-  "description": "Soft pacing, tactile description, balanced sentence length.",
-  "temperature_hint": 0.9,
-  "style": ["sensory", "gentle", "character-forward"]
-}
