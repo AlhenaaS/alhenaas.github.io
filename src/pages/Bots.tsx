@@ -197,6 +197,7 @@ export default function Bots() {
   const [filterSeries, setFilterSeries] = useState('');
   const [filterUniverse, setFilterUniverse] = useState('');
   const [filterTag, setFilterTag] = useState('');
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const [selectedBot, setSelectedBot] = useState<Bot | null>(null);
 
   useEffect(() => {
@@ -238,57 +239,73 @@ export default function Bots() {
       </div>
 
       <div className="filters-bar">
-        <input
-          type="text"
-          className="search-input"
-          placeholder={t.bots.search}
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-        />
+        <div className="search-row">
+          <input
+            type="text"
+            className="search-input"
+            placeholder={t.bots.search}
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
 
-        <select
-          className="filter-select"
-          value={filterGender}
-          onChange={e => setFilterGender(e.target.value)}
-        >
-          <option value="">{t.bots.filterGender}: {t.bots.all}</option>
-          {genderOptions.map(g => (
-            <option key={g.value} value={g.value}>{g.label}</option>
-          ))}
-        </select>
+          <button
+            type="button"
+            className={`filters-toggle ${filtersOpen ? 'filters-toggle-active' : ''}`}
+            aria-expanded={filtersOpen}
+            onClick={() => setFiltersOpen(open => !open)}
+          >
+            <span>{filtersOpen ? t.bots.hideFilters : t.bots.showFilters}</span>
+            <span className="filters-toggle-icon" aria-hidden="true">⌄</span>
+          </button>
+        </div>
 
-        <select
-          className="filter-select"
-          value={filterUniverse}
-          onChange={e => setFilterUniverse(e.target.value)}
-        >
-          <option value="">{t.bots.filterUniverse}: {t.bots.all}</option>
-          {universes.map(u => (
-            <option key={u} value={u}>{u}</option>
-          ))}
-        </select>
+        {filtersOpen && (
+          <div className="filters-panel" aria-label={t.bots.filters}>
+            <select
+              className="filter-select"
+              value={filterGender}
+              onChange={e => setFilterGender(e.target.value)}
+            >
+              <option value="">{t.bots.filterGender}: {t.bots.all}</option>
+              {genderOptions.map(g => (
+                <option key={g.value} value={g.value}>{g.label}</option>
+              ))}
+            </select>
 
-        <select
-          className="filter-select"
-          value={filterSeries}
-          onChange={e => setFilterSeries(e.target.value)}
-        >
-          <option value="">{t.bots.filterSeries}: {t.bots.all}</option>
-          {series.map(s => (
-            <option key={s} value={s}>{s}</option>
-          ))}
-        </select>
+            <select
+              className="filter-select"
+              value={filterUniverse}
+              onChange={e => setFilterUniverse(e.target.value)}
+            >
+              <option value="">{t.bots.filterUniverse}: {t.bots.all}</option>
+              {universes.map(u => (
+                <option key={u} value={u}>{u}</option>
+              ))}
+            </select>
 
-        <select
-          className="filter-select"
-          value={filterTag}
-          onChange={e => setFilterTag(e.target.value)}
-        >
-          <option value="">{t.bots.filterTag}: {t.bots.all}</option>
-          {allTags.map(tag => (
-            <option key={tag} value={tag}>{tag}</option>
-          ))}
-        </select>
+            <select
+              className="filter-select"
+              value={filterSeries}
+              onChange={e => setFilterSeries(e.target.value)}
+            >
+              <option value="">{t.bots.filterSeries}: {t.bots.all}</option>
+              {series.map(s => (
+                <option key={s} value={s}>{s}</option>
+              ))}
+            </select>
+
+            <select
+              className="filter-select"
+              value={filterTag}
+              onChange={e => setFilterTag(e.target.value)}
+            >
+              <option value="">{t.bots.filterTag}: {t.bots.all}</option>
+              {allTags.map(tag => (
+                <option key={tag} value={tag}>{tag}</option>
+              ))}
+            </select>
+          </div>
+        )}
       </div>
 
       {filtered.length === 0 ? (
