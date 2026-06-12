@@ -1,151 +1,261 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const grid = document.querySelector('[data-bot-grid]');
-  const searchInput = document.querySelector('[data-bot-search]');
-  const sortSelect = document.querySelector('[data-bot-sort]');
-  const filterButtons = document.querySelectorAll('[data-filter-value]');
-  const modal = document.querySelector('[data-bot-modal]');
-  const modalBody = document.querySelector('[data-modal-body]');
-  const modalClose = document.querySelector('[data-modal-close]');
-  let bots = [];
-  let lastFocusedElement = null;
-
+(() => {
   const state = {
+    bots: [],
     search: '',
+    genre: 'all',
+    type: 'all',
+    gender: 'all',
+    rating: 'all',
     sort: 'newest',
-    filters: new Set()
   };
 
-  if (!grid) return;
+  const ui = {};
+  let activeModalBot = null;
+  let lastFocusedElement = null;
 
-  fetch('data/bots.json')
-    .then((response) => response.json())
-    .then((data) => {
-      bots = data.bots || [];
+  const formatLabel = (value) => {
+    if (!value) return '';
+    return value
+      .replace(/-/g, ' ')
+      .replace(/\b\w/g, (letter) => letter.toUpperCase());
+  };
+
+  const createChip = (label, value, group) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = `chip${state[group] === value ? ' is-active' : ''}`;
+    button.textContent = label;
+    button.dataset.value = value;
+    button.dataset.group = group;
+    button.setAttribute('aria-pressed', String(state[group] === value));
+    button.addEventListener('click', () => {
+      state[group] = value;
+      renderFilterGroups();
       renderBots();
-    })
-    .catch(() => {
-      grid.innerHTML = '<p class="empty-state">Bot data could not be loaded.</p>';
     });
+    return button;
+  };
 
-  function matchesFilters(bot) {
-    const haystack = [bot.genre, bot.type, bot.gender, bot.nsfw ? 'nsfw' : 'sfw', ...bot.tags.map((tag) => tag.toLowerCase())];
-    return [...state.filters].every((filter) => haystack.includes(filter));
-  }
+  const renderFilterGroups = () => {
+    const fillGroup = (element, group, allLabel, options) => {
+      element.innerHTML = '';
+      element.appendChild(createChip(allLabel, 'all', group));
+      options.forEach((option) => element.appendChild(createChip(formatLabel(option), option, group)));
+    };
 
-  function renderBots() {
-    const query = state.search.trim().toLowerCase();
-    const filtered = bots
-      .filter((bot) => !query || `${bot.name} ${bot.tagline} ${bot.tags.join(' ')}`.toLowerCase().includes(query))
-      .filter(matchesFilters)
-      .sort((a, b) => {
-        if (state.sort === 'az') return a.name.localeCompare(b.name);
-        if (state.sort === 'za') return b.name.localeCompare(a.name);
-        if (state.sort === 'oldest') return new Date(a.created) - new Date(b.created);
-        return new Date(b.created) - new Date(a.created);
-      });
+    const genres = [...new Set(state.bots.map((bot) => bot.genre))].sort();
+    const types = [...new Set(state.bots.map((bot) => bot.type))].sort();
+    const genders = [...new Set(state.bots.map((bot) => bot.gender))].sort();
+
+    fillGroup(ui.genreFilters, 'genre', 'All', genres);
+    fillGroup(ui.typeFilters, 'type', 'All', types);
+    fillGroup(ui.genderFilters, 'gender', 'All', genders);
+
+    ui.ratingFilters.innerHTML = '';
+    [
+      ['All', 'all'],
+      ['SFW', 'sfw'],
+      ['NSFW', 'nsfw'],
+    ].forEach(([label, value]) => ui.ratingFilters.appendChild(createChip(label, value, 'rating')));
+  };
+
+  const matchesFilters = (bot) => {
+    const searchTarget = [bot.name, bot.tagline, bot.description, ...(bot.tags || [])].join(' ').toLowerCase();
+    const matchesSearch = !state.search || searchTarget.includes(state.search);
+    const matchesGenre = state.genre === 'all' || bot.genre === state.genre;
+    const matchesType = state.type === 'all' || bot.type === state.type;
+    const matchesGender = state.gender === 'all' || bot.gender === state.gender;
+    const matchesRating =
+      state.rating === 'all' ||
+      (state.rating === 'nsfw' && bot.nsfw) ||
+      (state.rating === 'sfw' && !bot.nsfw);
+
+    return matchesSearch && matchesGenre && matchesType && matchesGender && matchesRating;
+  };
+
+  const sortBots = (bots) => {
+    const sorted = [...bots];
+    if (state.sort === 'az') {
+      sorted.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (state.sort === 'za') {
+      sorted.sort((a, b) => b.name.localeCompare(a.name));
+    } else if (state.sort === 'oldest') {
+      sorted.sort((a, b) => new Date(a.released) - new Date(b.released));
+    } else {
+      sorted.sort((a, b) => new Date(b.released) - new Date(a.released));
+    }
+    return sorted;
+  };
+
+  const renderTagRow = (tags) =>
+    `<div class="tag-row">${tags.map((tag) => `<span class="tag">${tag}</span>`).join('')}</div>`;
+
+  const renderBots = () => {
+    const filtered = sortBots(state.bots.filter(matchesFilters));
+    ui.botCount.textContent = `${filtered.length} ${filtered.length === 1 ? 'entry' : 'entries'} in the archive`;
 
     if (!filtered.length) {
-      grid.innerHTML = '<p class="empty-state">No bots match the selected filters.</p>';
+      ui.botGrid.innerHTML = `
+        <div class="empty-state" data-reveal>
+          <h3>No matches found</h3>
+          <p>Try a different search or clear a few filters to widen the drawer.</p>
+        </div>
+      `;
+      window.AlhenasReveal?.observe(ui.botGrid);
       return;
     }
 
-    grid.innerHTML = filtered.map((bot) => `
-      <button class="card polaroid-card bot-card reveal" type="button" data-bot-id="${bot.id}">
-        <img class="polaroid-image" src="${bot.image}" alt="Portrait preview for ${bot.name}" loading="lazy">
-        <div class="polaroid-caption">${bot.name}</div>
-        <p class="bot-tagline">${bot.tagline}</p>
-        <div class="tag-list bot-tags">${bot.tags.map((tag) => `<span class="tag">${tag}</span>`).join('')}</div>
-      </button>
-    `).join('');
+    ui.botGrid.innerHTML = filtered
+      .map(
+        (bot) => `
+          <article class="bot-card polaroid-card" data-reveal>
+            <button class="bot-card__button" type="button" data-bot-id="${bot.id}" aria-label="Open details for ${bot.name}">
+              <div class="bot-card__media">
+                <img src="${bot.image}" alt="${bot.name} avatar" loading="lazy" />
+                ${bot.featured ? '<span class="bot-card__stamp" aria-hidden="true">✦</span>' : ''}
+              </div>
+              <div class="bot-card__body">
+                <h2 class="bot-card__title">${bot.name}</h2>
+                <p class="bot-card__tagline">${bot.tagline}</p>
+                <div style="height: 12px"></div>
+                ${renderTagRow(bot.tags)}
+              </div>
+            </button>
+          </article>
+        `,
+      )
+      .join('');
 
-    grid.querySelectorAll('[data-bot-id]').forEach((card) => {
-      card.addEventListener('click', () => openModal(card.dataset.botId));
-      card.classList.add('visible');
+    ui.botGrid.querySelectorAll('[data-bot-id]').forEach((button) => {
+      button.addEventListener('click', () => openModal(button.dataset.botId));
     });
-  }
 
-  function openModal(botId) {
-    const bot = bots.find((item) => item.id === botId);
-    if (!bot || !modal || !modalBody) return;
+    window.AlhenasReveal?.observe(ui.botGrid);
+  };
+
+  const makeDownloadItem = (label, file, meta = 'File ready') => `
+    <div class="download-item">
+      <div>
+        <span>${label}</span><br />
+        <small>${meta}</small>
+      </div>
+      <a class="btn-inline ${label === 'Main Character Card' ? 'btn-primary' : ''}" href="${file}" download>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 4v10m0 0 4-4m-4 4-4-4M5 19h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        Download
+      </a>
+    </div>
+  `;
+
+  const renderDescription = (description) =>
+    description
+      .split(/\n\n+/)
+      .map((paragraph) => `<p>${paragraph.trim()}</p>`)
+      .join('');
+
+  const openModal = (botId) => {
+    const bot = state.bots.find((entry) => entry.id === botId);
+    if (!bot) return;
+
+    activeModalBot = bot;
     lastFocusedElement = document.activeElement;
 
-    const lorebooks = bot.downloads.lorebooks.map((item) => `
-      <div class="download-row"><span>${item.name}</span><a class="button button-secondary" href="${item.file}" download>Download</a></div>
-    `).join('');
-    const alts = bot.alts.map((alt) => `
-      <article class="card alt-card">
-        <img src="${alt.image}" alt="${alt.name} preview" loading="lazy">
-        <p class="polaroid-caption">${alt.name}</p>
-        <a class="button button-secondary" href="${alt.file}" download>Download</a>
-      </article>
-    `).join('');
+    const downloads = [
+      makeDownloadItem(bot.downloads.main.name, bot.downloads.main.file, 'Primary card export'),
+      ...bot.downloads.lorebooks.map((item) => makeDownloadItem(item.name, item.file, 'Lorebook JSON')),
+    ].join('');
 
-    modalBody.innerHTML = `
-      <div class="bot-modal-head">
-        <img class="bot-modal-image" src="${bot.image}" alt="Portrait preview for ${bot.name}">
+    const alts = bot.alts.length
+      ? bot.alts
+          .map(
+            (alt) => `
+              <article class="alt-card">
+                <div class="alt-card__media">
+                  <img src="${alt.image}" alt="${alt.name} preview" loading="lazy" />
+                </div>
+                <h4>${alt.name}</h4>
+                <a class="btn-inline" href="${alt.file}" download>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 4v10m0 0 4-4m-4 4-4-4M5 19h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  Download
+                </a>
+              </article>
+            `,
+          )
+          .join('')
+      : '<p>No alternate prints have been filed for this entry yet.</p>';
+
+    ui.botModalContent.innerHTML = `
+      <div class="bot-card-modal__layout">
+        <div class="bot-card-modal__image">
+          <img src="${bot.image}" alt="${bot.name} full preview" />
+        </div>
         <div>
-          <h2>${bot.name}</h2>
-          <p>${bot.tagline}</p>
-          <div class="tag-list" style="margin-top: 16px;">${bot.tags.map((tag) => `<span class="tag">${tag}</span>`).join('')}</div>
+          <div class="bot-card-modal__header">
+            <h2 id="botModalTitle">${bot.name}</h2>
+            <p>${bot.tagline}</p>
+          </div>
+          <div style="height: 16px"></div>
+          ${renderTagRow(bot.tags)}
+          <div class="modal__separator"></div>
+          <div class="modal-copy">
+            <h3>Description</h3>
+            ${renderDescription(bot.description)}
+          </div>
         </div>
       </div>
-      <section class="modal-section"><h3>Description</h3><p>${bot.description}</p></section>
-      <section class="modal-section">
+      <div class="modal__separator"></div>
+      <section>
         <h3>Downloads</h3>
-        <div class="download-row"><span>Main Character Card</span><a class="button button-primary" href="${bot.downloads.main}" download>Download</a></div>
-        ${lorebooks || '<p>No lorebooks attached.</p>'}
+        <div style="height: 16px"></div>
+        <div class="download-list">${downloads}</div>
       </section>
-      <section class="modal-section"><h3>Alt Versions</h3><div class="alt-grid">${alts || '<p>No alternate versions yet.</p>'}</div></section>
+      <div class="modal__separator"></div>
+      <section>
+        <h3>Alt Versions</h3>
+        <div style="height: 16px"></div>
+        <div class="alt-grid">${alts}</div>
+      </section>
     `;
 
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    modalClose.focus();
-  }
+    ui.botModal.classList.add('is-open');
+    ui.botModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    ui.modalClose.focus();
+  };
 
-  function closeModal() {
-    if (!modal) return;
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    if (lastFocusedElement) lastFocusedElement.focus();
-  }
+  const closeModal = () => {
+    if (!ui.botModal.classList.contains('is-open')) return;
+    ui.botModal.classList.remove('is-open');
+    ui.botModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    ui.botModalContent.innerHTML = '';
+    activeModalBot = null;
+    lastFocusedElement?.focus?.();
+  };
 
-  searchInput?.addEventListener('input', (event) => {
-    state.search = event.target.value;
-    renderBots();
-  });
+  const trapModalFocus = (event) => {
+    if (!ui.botModal.classList.contains('is-open')) return;
 
-  sortSelect?.addEventListener('change', (event) => {
-    state.sort = event.target.value;
-    renderBots();
-  });
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeModal();
+      return;
+    }
 
-  filterButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const value = button.dataset.filterValue;
-      if (state.filters.has(value)) state.filters.delete(value);
-      else state.filters.add(value);
-      button.setAttribute('aria-pressed', String(state.filters.has(value)));
-      renderBots();
-    });
-  });
+    if (event.key !== 'Tab') return;
 
-  modalClose?.addEventListener('click', closeModal);
-  modal?.addEventListener('click', (event) => {
-    if (event.target === modal) closeModal();
-  });
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && modal?.classList.contains('is-open')) closeModal();
-    if (event.key === 'Tab' && modal?.classList.contains('is-open')) trapFocus(event);
-  });
+    const focusable = ui.botModal.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+    );
 
-  function trapFocus(event) {
-    const focusable = modal.querySelectorAll('a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (!focusable.length) return;
+
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
-    if (!first || !last) return;
+
     if (event.shiftKey && document.activeElement === first) {
       event.preventDefault();
       last.focus();
@@ -153,5 +263,58 @@ document.addEventListener('DOMContentLoaded', () => {
       event.preventDefault();
       first.focus();
     }
-  }
-});
+  };
+
+  const init = async () => {
+    Object.assign(ui, {
+      botGrid: document.getElementById('botGrid'),
+      botCount: document.getElementById('botCount'),
+      botSearch: document.getElementById('botSearch'),
+      genreFilters: document.getElementById('genreFilters'),
+      typeFilters: document.getElementById('typeFilters'),
+      genderFilters: document.getElementById('genderFilters'),
+      ratingFilters: document.getElementById('ratingFilters'),
+      sortBots: document.getElementById('sortBots'),
+      botModal: document.getElementById('botModal'),
+      botModalContent: document.getElementById('botModalContent'),
+      modalClose: document.querySelector('.modal__close'),
+    });
+
+    ui.botSearch.addEventListener('input', (event) => {
+      state.search = event.target.value.trim().toLowerCase();
+      renderBots();
+    });
+
+    ui.sortBots.addEventListener('change', (event) => {
+      state.sort = event.target.value;
+      renderBots();
+    });
+
+    ui.modalClose.addEventListener('click', closeModal);
+    ui.botModal.addEventListener('click', (event) => {
+      if (event.target === ui.botModal) closeModal();
+    });
+    document.addEventListener('keydown', trapModalFocus);
+
+    try {
+      const response = await fetch('data/bots.json');
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const payload = await response.json();
+      state.bots = payload.bots || [];
+      renderFilterGroups();
+      renderBots();
+    } catch (error) {
+      ui.botCount.textContent = 'Unable to load archive.';
+      ui.botGrid.innerHTML = `
+        <div class="empty-state" data-reveal>
+          <h3>Archive unavailable</h3>
+          <p>There was a problem loading bots.json. Please check the file paths and try again.</p>
+        </div>
+      `;
+      window.AlhenasReveal?.observe(ui.botGrid);
+      console.error(error);
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', init);
+})();

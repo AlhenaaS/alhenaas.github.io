@@ -1,6 +1,8 @@
-.toolkit-page { padding: var(--space-2xl) 0 var(--space-3xl); }
+.toolkit-shell {
+  padding-bottom: var(--space-3xl);
+}
 
-.category-tabs {
+.toolkit-tabs {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -8,55 +10,31 @@
   margin-bottom: var(--space-2xl);
 }
 
-.toolkit-category {
-  scroll-margin-top: 96px;
+.toolkit-section {
+  padding-top: var(--space-lg);
+  scroll-margin-top: calc(var(--header-height) + 24px);
+}
+
+.toolkit-section + .toolkit-section {
   margin-top: var(--space-3xl);
 }
 
-.toolkit-category:first-of-type { margin-top: 0; }
-
-.category-title {
+.toolkit-section__header {
   margin-bottom: var(--space-lg);
-  padding-bottom: var(--space-sm);
-  border-bottom: 1px solid var(--border-subtle);
 }
 
-.accordion {
-  border: 1px solid var(--border-card);
-  border-radius: var(--radius-lg);
-  background: var(--bg-card);
-  box-shadow: var(--shadow-card);
-  overflow: hidden;
+.toolkit-section__header p {
+  margin-top: var(--space-xs);
 }
 
-.accordion + .accordion { margin-top: var(--space-md); }
-
-.accordion-trigger {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  min-height: 56px;
-  padding: var(--space-md) var(--space-lg);
-  border: 0;
-  background: transparent;
-  color: var(--text-primary);
-  text-align: left;
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-lg);
 }
 
-.accordion-panel {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-}
-
-.accordion-content {
-  padding: 0 var(--space-lg) var(--space-lg);
-  border-top: 1px solid var(--border-subtle);
-  color: var(--text-secondary);
-}
-
-.accordion-content code {
-  font-family: var(--font-mono);
-  color: var(--accent-primary);
+.tutorial-summary {
+  color: var(--text-tertiary);
+  font-size: var(--fs-small);
+  margin-top: var(--space-xs);
 }

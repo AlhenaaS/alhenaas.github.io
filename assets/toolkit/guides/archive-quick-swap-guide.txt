@@ -1,0 +1,2 @@
+Swap presets at the start of a scene change instead of mid-turn.
+Keep one reset macro ready so the model does not carry old cadence too long.

@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" role="img" aria-label="Occult tape portrait placeholder">
-  <rect width="600" height="800" fill="#2C2622"/>
-  <path d="M80 130h440v545H80z" fill="#352E29" stroke="#4A3F37" stroke-width="8"/>
-  <circle cx="300" cy="300" r="118" fill="#D4756A" opacity="0.42"/>
-  <path d="M155 675c35-140 260-185 330 0" fill="#D4A87A" opacity="0.45"/>
-  <rect x="180" y="75" width="210" height="40" rx="4" fill="#D4A87A" opacity="0.55" transform="rotate(-8 285 95)"/>
-  <text x="300" y="740" text-anchor="middle" font-family="Georgia, serif" font-size="34" fill="#E8E0D8">Case File</text>
-</svg>

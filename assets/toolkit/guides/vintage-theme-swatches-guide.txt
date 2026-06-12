@@ -1,0 +1,2 @@
+These swatches mirror the site palette.
+Use them as a starting point for cards, docs, or lightweight themes.
