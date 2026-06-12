@@ -27,7 +27,10 @@
     document.documentElement.dataset.theme = theme;
     document.querySelectorAll('.theme-toggle').forEach((button) => {
       button.setAttribute('aria-pressed', String(theme === 'dark'));
-      button.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+      button.setAttribute(
+        'aria-label',
+        theme === 'dark' ? 'Переключить на светлую тему' : 'Переключить на тёмную тему',
+      );
       const icon = button.querySelector('.theme-toggle__icon');
       if (icon) {
         icon.innerHTML = theme === 'dark' ? themeIcons.dark : themeIcons.light;
@@ -60,14 +63,14 @@
     const closeMenu = () => {
       nav.classList.remove('is-open');
       menuButton.setAttribute('aria-expanded', 'false');
-      menuButton.setAttribute('aria-label', 'Open navigation menu');
+      menuButton.setAttribute('aria-label', 'Открыть меню навигации');
       document.body.classList.remove('menu-open');
     };
 
     const openMenu = () => {
       nav.classList.add('is-open');
       menuButton.setAttribute('aria-expanded', 'true');
-      menuButton.setAttribute('aria-label', 'Close navigation menu');
+      menuButton.setAttribute('aria-label', 'Закрыть меню навигации');
       document.body.classList.add('menu-open');
     };
 

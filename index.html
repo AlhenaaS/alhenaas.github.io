@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alhenas — Vintage AI Archive</title>
+    <title>Alhenas — винтажный AI-архив</title>
     <meta
       name="description"
-      content="Alhenas — a minimalist vintage archive for handcrafted AI characters, presets, and tools for SillyTavern."
+      content="Alhenas — минималистичный винтажный архив авторских AI-персонажей, пресетов и инструментов для SillyTavern."
+      data-i18n-content="meta.index.description"
     />
     <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
     <link rel="alternate icon" href="favicon.ico" />
@@ -40,28 +41,29 @@
   <body>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="index.html" aria-label="Alhenas home">
+        <a class="brand" href="index.html" aria-label="Главная Alhenas" data-i18n-label="brand.home">
           <span class="brand-mark" aria-hidden="true">✦</span>
           <span>Alhenas</span>
           <span class="brand-glyph" aria-hidden="true">♊</span>
         </a>
 
-        <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <nav class="site-nav" id="site-nav" aria-label="Основная навигация" data-i18n-label="nav.label">
           <ul class="nav-list">
-            <li><a class="nav-link active" href="index.html">Home</a></li>
-            <li><a class="nav-link" href="bots.html">Bots</a></li>
-            <li><a class="nav-link" href="toolkit.html">Tavern Toolkit</a></li>
+            <li><a class="nav-link active" href="index.html" data-i18n="nav.home">Главная</a></li>
+            <li><a class="nav-link" href="bots.html" data-i18n="nav.bots">Боты</a></li>
+            <li><a class="nav-link" href="toolkit.html" data-i18n="nav.toolkit">Инструменты Tavern</a></li>
           </ul>
         </nav>
 
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation menu">
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Открыть меню навигации" data-i18n-label="actions.menu">
           <svg class="menu-toggle__icon" viewBox="0 0 24 24" aria-hidden="true">
             <path fill="currentColor" d="M4 7h16v2H4zm0 8h16v2H4z" />
           </svg>
         </button>
 
         <div class="header-actions">
-          <button class="theme-toggle" type="button" aria-label="Switch theme" aria-pressed="false">
+          <button class="language-toggle" type="button" aria-label="Switch site language to English" title="English">EN</button>
+          <button class="theme-toggle" type="button" aria-label="Переключить тему" aria-pressed="false" data-i18n-label="actions.theme">
             <span class="theme-toggle__icon" aria-hidden="true"></span>
           </button>
         </div>
@@ -79,16 +81,15 @@
         <div class="container hero__stack" data-reveal>
           <div class="hero__eyebrow">
             <span aria-hidden="true">✦</span>
-            <span>Vintage archive • Gemini hush</span>
+            <span data-i18n="home.eyebrow">Винтажный архив • тихий свет Близнецов</span>
           </div>
           <h1 class="hero__title">Alhenas</h1>
           <p class="hero__subtitle">
-            Handcrafted AI characters, presets, and gentle toolkit notes for SillyTavern — arranged like paper keepsakes,
-            annotated under the quiet light of Alhena.
+            <span data-i18n="home.subtitle">Авторские AI-персонажи, пресеты и мягкие заметки для SillyTavern — разложенные как бумажные памятки и подписанные под спокойным светом Альхены.</span>
           </p>
           <div class="hero__actions">
-            <a class="btn btn-primary" href="bots.html">Browse Bots</a>
-            <a class="btn btn-secondary" href="toolkit.html">Tavern Toolkit</a>
+            <a class="btn btn-primary" href="bots.html" data-i18n="home.cta.bots">Смотреть ботов</a>
+            <a class="btn btn-secondary" href="toolkit.html" data-i18n="home.cta.toolkit">Инструменты Tavern</a>
           </div>
         </div>
       </section>
@@ -98,8 +99,8 @@
       <section class="about gemini-ornament">
         <div class="container">
           <div class="section-heading" data-reveal>
-            <h2>Small paper constellations</h2>
-            <p>Three quiet corners of the archive: characters, utilities, and notes made to feel personal rather than clinical.</p>
+            <h2 data-i18n="home.about.title">Маленькие бумажные созвездия</h2>
+            <p data-i18n="home.about.text">Три тихих угла архива: персонажи, утилиты и заметки, созданные личными, а не клиническими.</p>
           </div>
 
           <div class="about-grid">
@@ -110,8 +111,8 @@
                   <circle cx="18" cy="16.5" r="2" fill="currentColor" />
                 </svg>
               </div>
-              <h3>Character archive</h3>
-              <p>Polaroid-style profiles with tags, descriptions, alt versions, and ready-to-download files.</p>
+              <h3 data-i18n="home.about.characters.title">Архив персонажей</h3>
+              <p data-i18n="home.about.characters.text">Профили в стиле полароидов с тегами, описаниями, альтернативными версиями и готовыми файлами для скачивания.</p>
             </article>
 
             <article class="about-card paper-card" data-reveal>
@@ -122,8 +123,8 @@
                   <path d="M12 4v3M12 17v3M4 12h3M17 12h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
                 </svg>
               </div>
-              <h3>Tavern Toolkit</h3>
-              <p>Presets, regex, extensions, and practical little helpers for tailoring a softer workflow.</p>
+              <h3 data-i18n="home.about.toolkit.title">Инструменты Tavern</h3>
+              <p data-i18n="home.about.toolkit.text">Пресеты, regex, расширения и практичные маленькие помощники для более мягкого рабочего процесса.</p>
             </article>
 
             <article class="about-card paper-card" data-reveal>
@@ -134,8 +135,8 @@
                   <circle cx="15.5" cy="7.5" r="1.2" fill="currentColor" />
                 </svg>
               </div>
-              <h3>Observer's notes</h3>
-              <p>Tutorials and caption-like guidance with a restrained Gemini motif and scrapbook softness.</p>
+              <h3 data-i18n="home.about.notes.title">Заметки наблюдателя</h3>
+              <p data-i18n="home.about.notes.text">Руководства и подписи-подсказки со сдержанным мотивом Близнецов и мягкостью скрапбука.</p>
             </article>
           </div>
         </div>
@@ -146,8 +147,8 @@
       <section class="featured">
         <div class="container">
           <div class="section-heading" data-reveal>
-            <h2>Featured selections</h2>
-            <p>Three first picks from the drawer — presented as if they were penciled in after a late-night cataloging session.</p>
+            <h2 data-i18n="home.featured.title">Избранные подборки</h2>
+            <p data-i18n="home.featured.text">Три первых выбора из ящика — будто их карандашом добавили после ночной каталогизации.</p>
           </div>
 
           <div class="featured-grid">
@@ -159,8 +160,8 @@
                 </div>
                 <div class="feature-card__body">
                   <p>Mirielle Vale</p>
-                  <p>Botanical fantasy archivist</p>
-                  <div class="feature-card__note handwritten">alhena pick</div>
+                  <p data-i18n="home.feature.mirielle.role">Ботаническая архивистка фэнтези</p>
+                  <div class="feature-card__note handwritten" data-i18n="home.feature.mirielle.note">выбор Альхены</div>
                 </div>
               </a>
             </article>
@@ -172,8 +173,8 @@
                 </div>
                 <div class="feature-card__body">
                   <p>Caelum Twins</p>
-                  <p>Paired voices, mirrored memory</p>
-                  <div class="feature-card__note handwritten">gemini archive</div>
+                  <p data-i18n="home.feature.caelum.role">Парные голоса, зеркальная память</p>
+                  <div class="feature-card__note handwritten" data-i18n="home.feature.caelum.note">архив Близнецов</div>
                 </div>
               </a>
             </article>
@@ -186,8 +187,8 @@
                 </div>
                 <div class="feature-card__body">
                   <p>Juniper North</p>
-                  <p>Low-noise orbital engineer</p>
-                  <div class="feature-card__note handwritten">field note no. 02</div>
+                  <p data-i18n="home.feature.juniper.role">Орбитальная инженерка тихого профиля</p>
+                  <div class="feature-card__note handwritten" data-i18n="home.feature.juniper.note">полевая заметка № 02</div>
                 </div>
               </a>
             </article>
@@ -199,7 +200,7 @@
     <footer class="site-footer">
       <div class="container">
         <div class="footer-divider" aria-hidden="true"><span>✦ • ♊ • ✦</span></div>
-        <div class="social-links" aria-label="Social links">
+        <div class="social-links" aria-label="Социальные ссылки" data-i18n-label="footer.social">
           <a class="social-link" href="https://github.com/" target="_blank" rel="noreferrer" aria-label="GitHub">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.3.8-.6v-2.2c-3.4.7-4.1-1.5-4.1-1.5-.6-1.4-1.4-1.8-1.4-1.8-1.2-.8.1-.8.1-.8 1.3.1 2 .9 2 .9 1.2 2 3.1 1.4 3.9 1.1.1-.9.5-1.4.9-1.7-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.3-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.4 1.2A11.9 11.9 0 0 1 12 6.6c1.1 0 2.1.1 3.2.4 2.4-1.6 3.4-1.2 3.4-1.2.7 1.6.2 2.9.1 3.2.8.9 1.2 2 1.2 3.3 0 4.6-2.8 5.6-5.5 5.9.5.4 1 1.2 1 2.4v3.6c0 .4.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg>
           </a>
@@ -213,11 +214,12 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23 22h-6.1l-4.8-6.3L6.6 22H3.5l7.3-8.3L1 2h6.2L11.5 8 18.9 2Zm-1.1 18h1.7L6.3 3.9H4.5L17.8 20Z"/></svg>
           </a>
         </div>
-        <div class="footer-note">made with ✦ by Alhenas</div>
+        <div class="footer-note" data-i18n="footer.note">сделано с ✦ от Alhenas</div>
         <div class="footer-copy">© 2025</div>
       </div>
     </footer>
 
+    <script src="js/i18n.js" defer></script>
     <script src="js/theme.js" defer></script>
     <script src="js/animations.js" defer></script>
   </body>

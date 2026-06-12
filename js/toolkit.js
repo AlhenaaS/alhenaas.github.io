@@ -1,5 +1,7 @@
 (() => {
   const ui = {};
+  const getLocale = () => window.AlhenasI18n?.getLanguage?.() || 'ru';
+  let currentData = null;
 
   const buildTagRow = (tags = []) =>
     `<div class="tag-row">${tags.map((tag) => `<span class="tag">${tag}</span>`).join('')}</div>`;
@@ -16,8 +18,8 @@
       <div style="height: 16px"></div>
       ${buildTagRow([item.type, item.version])}
       <div class="resource-card__actions">
-        <a class="btn-inline btn-primary" href="${item.download}" download>Download</a>
-        ${item.guide ? `<a class="btn-inline" href="${item.guide}" target="_blank" rel="noreferrer">View Guide →</a>` : ''}
+        <a class="btn-inline btn-primary" href="${item.download}" download>${getLocale() === 'ru' ? 'Скачать' : 'Download'}</a>
+        ${item.guide ? `<a class="btn-inline" href="${item.guide}" target="_blank" rel="noreferrer">${getLocale() === 'ru' ? 'Открыть руководство →' : 'View Guide →'}</a>` : ''}
       </div>
     </article>
   `;
@@ -110,6 +112,13 @@
     });
   };
 
+  const loadData = async () => {
+    const source = getLocale() === 'en' ? 'data/toolkit.en.json' : 'data/toolkit.json';
+    const response = await fetch(source);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return response.json();
+  };
+
   const init = async () => {
     Object.assign(ui, {
       tabs: document.getElementById('toolkitTabs'),
@@ -117,21 +126,24 @@
     });
 
     try {
-      const response = await fetch('data/toolkit.json');
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const data = await response.json();
+      const data = currentData && currentData.locale === getLocale() ? currentData.payload : await loadData();
+      currentData = { locale: getLocale(), payload: data };
       renderSections(data);
     } catch (error) {
       ui.sections.innerHTML = `
         <div class="empty-state" data-reveal>
-          <h3>Toolkit unavailable</h3>
-          <p>There was a problem loading toolkit.json. Please verify the data file and try again.</p>
+          <h3>${getLocale() === 'ru' ? 'Инструменты недоступны' : 'Toolkit unavailable'}</h3>
+          <p>${getLocale() === 'ru' ? 'Не удалось загрузить toolkit.json. Проверьте файл данных и попробуйте снова.' : 'There was a problem loading toolkit.json. Please verify the data file and try again.'}</p>
         </div>
       `;
       window.AlhenasReveal?.observe(ui.sections);
       console.error(error);
     }
   };
+
+  window.addEventListener('alhenas:languagechange', () => {
+    init().catch((error) => console.error(error));
+  });
 
   document.addEventListener('DOMContentLoaded', init);
 })();

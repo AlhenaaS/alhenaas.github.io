@@ -1,0 +1,209 @@
+{
+  "bots": [
+    {
+      "id": "mirielle-vale",
+      "name": "Mirielle Vale",
+      "tagline": "Botanical archivist with a lantern and too many pressed flowers.",
+      "image": "assets/bots/mirielle-vale/avatar.png",
+      "tags": ["Fantasy", "Female", "SFW", "OC"],
+      "genre": "fantasy",
+      "type": "oc",
+      "gender": "female",
+      "nsfw": false,
+      "featured": true,
+      "released": "2026-05-14",
+      "description": "Mirielle keeps a herbarium of impossible plants, annotating each specimen with practical care notes and a little too much sentiment. She works well in soft fantasy, wandering archivist, and slow-burn companionship scenes.\n\nHer dialogue favors tactile detail — paper fibers, glass vials, damp leaves, lamp smoke — while still leaving enough space for improvisation. A matching world lorebook and a seasonal variant are tucked into the downloads.",
+      "downloads": {
+        "main": {
+          "name": "Main Character Card",
+          "file": "assets/bots/mirielle-vale/mirielle-vale-card.json"
+        },
+        "lorebooks": [
+          {
+            "name": "Lorebook: Greenhouse Notes",
+            "file": "assets/bots/mirielle-vale/lorebook-greenhouse.json"
+          },
+          {
+            "name": "Lorebook: Field Pressings",
+            "file": "assets/bots/mirielle-vale/lorebook-field-pressings.json"
+          }
+        ]
+      },
+      "alts": [
+        {
+          "name": "Rainhouse Version",
+          "image": "assets/bots/mirielle-vale/alt-rainhouse.png",
+          "file": "assets/bots/mirielle-vale/alt-rainhouse-card.json"
+        }
+      ]
+    },
+    {
+      "id": "elias-thorne",
+      "name": "Elias Thorne",
+      "tagline": "A reserved museum restorer for modern mystery and quiet city scenes.",
+      "image": "assets/bots/elias-thorne/avatar.png",
+      "tags": ["Modern", "Male", "SFW", "OC"],
+      "genre": "modern",
+      "type": "oc",
+      "gender": "male",
+      "nsfw": false,
+      "featured": false,
+      "released": "2026-03-02",
+      "description": "Elias is built for intimate modern roleplay, restoration workshops, and conversations that hinge on memory, craft, and things that survive damage. He notices varnish cracks, glove powder, and the shape of silence in large rooms.\n\nUse him for museum intrigue, understated romance, or companion scenes where attention to detail matters more than spectacle.",
+      "downloads": {
+        "main": {
+          "name": "Main Character Card",
+          "file": "assets/bots/elias-thorne/elias-thorne-card.json"
+        },
+        "lorebooks": [
+          {
+            "name": "Lorebook: City Museum",
+            "file": "assets/bots/elias-thorne/lorebook-city-museum.json"
+          }
+        ]
+      },
+      "alts": [
+        {
+          "name": "After Hours",
+          "image": "assets/bots/elias-thorne/alt-after-hours.png",
+          "file": "assets/bots/elias-thorne/alt-after-hours-card.json"
+        }
+      ]
+    },
+    {
+      "id": "sable-archive",
+      "name": "Sable Archive",
+      "tagline": "An eerie catalog entity that answers from the wrong drawer.",
+      "image": "assets/bots/sable-archive/avatar.png",
+      "tags": ["Horror", "Non-binary", "NSFW", "Scenario"],
+      "genre": "horror",
+      "type": "scenario",
+      "gender": "non-binary",
+      "nsfw": true,
+      "featured": false,
+      "released": "2026-01-20",
+      "description": "Sable Archive is not exactly a person — more a voice that lives between index cards, locked cabinets, and pages that refuse to stay filed. It is suited to liminal horror, archival dread, and scenes that drift between invitation and warning.\n\nThe tone leans atmospheric first: dust, fluorescents, misnumbered shelves, and the feeling that two sets of records describe the same life in different ways. Optional NSFW material is present, but easy to steer away from.",
+      "downloads": {
+        "main": {
+          "name": "Main Character Card",
+          "file": "assets/bots/sable-archive/sable-archive-card.json"
+        },
+        "lorebooks": [
+          {
+            "name": "Lorebook: Reading Room",
+            "file": "assets/bots/sable-archive/lorebook-reading-room.json"
+          }
+        ]
+      },
+      "alts": []
+    },
+    {
+      "id": "caelum-twins",
+      "name": "Caelum Twins",
+      "tagline": "Paired celestial navigators speaking in mirrored turns.",
+      "image": "assets/bots/caelum-twins/avatar.png",
+      "tags": ["Fantasy", "Group", "SFW", "Scenario"],
+      "genre": "fantasy",
+      "type": "scenario",
+      "gender": "group",
+      "nsfw": false,
+      "featured": true,
+      "released": "2026-06-01",
+      "description": "The Caelum Twins are designed as a duet: two complementary voices with slightly different instincts, one warm and one exacting. They work best in road narratives, divination scenes, and stories that benefit from balanced contrast rather than conflict.\n\nBecause the pair answer together, they make a subtle nod to Gemini without ever slipping into bright space opera. Expect paired imagery, symmetry, and a lot of careful cross-reference between them.",
+      "downloads": {
+        "main": {
+          "name": "Main Character Card",
+          "file": "assets/bots/caelum-twins/caelum-twins-card.json"
+        },
+        "lorebooks": [
+          {
+            "name": "Lorebook: Sky Routes",
+            "file": "assets/bots/caelum-twins/lorebook-sky-routes.json"
+          },
+          {
+            "name": "Lorebook: Twin Cues",
+            "file": "assets/bots/caelum-twins/lorebook-twin-cues.json"
+          }
+        ]
+      },
+      "alts": [
+        {
+          "name": "Winter Mapping",
+          "image": "assets/bots/caelum-twins/alt-winter-mapping.png",
+          "file": "assets/bots/caelum-twins/alt-winter-mapping-card.json"
+        },
+        {
+          "name": "Harbor Ledger",
+          "image": "assets/bots/caelum-twins/alt-harbor-ledger.png",
+          "file": "assets/bots/caelum-twins/alt-harbor-ledger-card.json"
+        }
+      ]
+    },
+    {
+      "id": "juniper-north",
+      "name": "Juniper North",
+      "tagline": "A patient orbital mechanic with an analog notebook and dry humor.",
+      "image": "assets/bots/juniper-north/avatar.png",
+      "tags": ["Sci-Fi", "Female", "SFW", "OC"],
+      "genre": "sci-fi",
+      "type": "oc",
+      "gender": "female",
+      "nsfw": false,
+      "featured": true,
+      "released": "2026-04-08",
+      "description": "Juniper keeps the science-fiction side grounded: maintenance logs, patched insulation, old radio habits, and the practical poetry of keeping fragile systems alive. She is ideal for low-key orbital settings, long-haul companionship, and technical scenes with warmth.\n\nDespite the setting, her presentation stays close to the site's vintage tone — more flight journal than neon cockpit.",
+      "downloads": {
+        "main": {
+          "name": "Main Character Card",
+          "file": "assets/bots/juniper-north/juniper-north-card.json"
+        },
+        "lorebooks": [
+          {
+            "name": "Lorebook: Dockside Manual",
+            "file": "assets/bots/juniper-north/lorebook-dockside-manual.json"
+          }
+        ]
+      },
+      "alts": [
+        {
+          "name": "Station Gray",
+          "image": "assets/bots/juniper-north/alt-station-gray.png",
+          "file": "assets/bots/juniper-north/alt-station-gray-card.json"
+        }
+      ]
+    },
+    {
+      "id": "vesper-rowan",
+      "name": "Vesper Rowan",
+      "tagline": "A velvet-voiced singer for moody lounge nights and sharp banter.",
+      "image": "assets/bots/vesper-rowan/avatar.png",
+      "tags": ["Modern", "Male", "NSFW", "Fandom"],
+      "genre": "modern",
+      "type": "fandom",
+      "gender": "male",
+      "nsfw": true,
+      "featured": false,
+      "released": "2025-11-19",
+      "description": "Vesper is tuned for smoky venue scenes, private rehearsal room tension, and charismatic conversation that can pivot from teasing to sincere without losing its composure. The fandom frame is intentionally broad, so he can slip into multiple adjacent settings.\n\nOptional NSFW content is available in the base card, while the midnight alt leans more dramatic and performative.",
+      "downloads": {
+        "main": {
+          "name": "Main Character Card",
+          "file": "assets/bots/vesper-rowan/vesper-rowan-card.json"
+        },
+        "lorebooks": [
+          {
+            "name": "Lorebook: Club Backstage",
+            "file": "assets/bots/vesper-rowan/lorebook-club-backstage.json"
+          }
+        ]
+      },
+      "alts": [
+        {
+          "name": "Midnight Set",
+          "image": "assets/bots/vesper-rowan/alt-midnight-set.png",
+          "file": "assets/bots/vesper-rowan/alt-midnight-set-card.json"
+        }
+      ]
+    }
+  ]
+}

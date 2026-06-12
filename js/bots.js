@@ -1,4 +1,7 @@
 (() => {
+  const getLocale = () => window.AlhenasI18n?.getLanguage?.() || 'ru';
+  const t = (key) => window.AlhenasI18n?.translate?.(key) || key;
+
   const state = {
     bots: [],
     search: '',
@@ -12,9 +15,42 @@
   const ui = {};
   let activeModalBot = null;
   let lastFocusedElement = null;
+  let loadedLocale = '';
 
   const formatLabel = (value) => {
     if (!value) return '';
+    const locale = getLocale();
+    const map = {
+      ru: {
+        fantasy: 'Фэнтези',
+        modern: 'Современность',
+        horror: 'Хоррор',
+        'sci-fi': 'Научная фантастика',
+        oc: 'Оригинальный персонаж',
+        scenario: 'Сценарий',
+        female: 'Женский',
+        male: 'Мужской',
+        'non-binary': 'Небинарный',
+        group: 'Группа',
+        sfw: 'SFW',
+        nsfw: 'NSFW',
+      },
+      en: {
+        fantasy: 'Fantasy',
+        modern: 'Modern',
+        horror: 'Horror',
+        'sci-fi': 'Sci-Fi',
+        oc: 'OC',
+        scenario: 'Scenario',
+        female: 'Female',
+        male: 'Male',
+        'non-binary': 'Non-binary',
+        group: 'Group',
+        sfw: 'SFW',
+        nsfw: 'NSFW',
+      },
+    };
+    if (map[locale]?.[value]) return map[locale][value];
     return value
       .replace(/-/g, ' ')
       .replace(/\b\w/g, (letter) => letter.toUpperCase());
@@ -47,13 +83,13 @@
     const types = [...new Set(state.bots.map((bot) => bot.type))].sort();
     const genders = [...new Set(state.bots.map((bot) => bot.gender))].sort();
 
-    fillGroup(ui.genreFilters, 'genre', 'All', genres);
-    fillGroup(ui.typeFilters, 'type', 'All', types);
-    fillGroup(ui.genderFilters, 'gender', 'All', genders);
+    fillGroup(ui.genreFilters, 'genre', t('filters.all'), genres);
+    fillGroup(ui.typeFilters, 'type', t('filters.all'), types);
+    fillGroup(ui.genderFilters, 'gender', t('filters.all'), genders);
 
     ui.ratingFilters.innerHTML = '';
     [
-      ['All', 'all'],
+      [t('filters.all'), 'all'],
       ['SFW', 'sfw'],
       ['NSFW', 'nsfw'],
     ].forEach(([label, value]) => ui.ratingFilters.appendChild(createChip(label, value, 'rating')));
@@ -92,13 +128,16 @@
 
   const renderBots = () => {
     const filtered = sortBots(state.bots.filter(matchesFilters));
-    ui.botCount.textContent = `${filtered.length} ${filtered.length === 1 ? 'entry' : 'entries'} in the archive`;
+    ui.botCount.textContent =
+      getLocale() === 'ru'
+        ? `${filtered.length} ${filtered.length === 1 ? 'запись' : filtered.length < 5 ? 'записи' : 'записей'} в архиве`
+        : `${filtered.length} ${filtered.length === 1 ? 'entry' : 'entries'} in the archive`;
 
     if (!filtered.length) {
       ui.botGrid.innerHTML = `
         <div class="empty-state" data-reveal>
-          <h3>No matches found</h3>
-          <p>Try a different search or clear a few filters to widen the drawer.</p>
+          <h3>${getLocale() === 'ru' ? 'Совпадений не найдено' : 'No matches found'}</h3>
+          <p>${getLocale() === 'ru' ? 'Попробуйте другой запрос или сбросьте несколько фильтров, чтобы расширить выборку.' : 'Try a different search or clear a few filters to widen the drawer.'}</p>
         </div>
       `;
       window.AlhenasReveal?.observe(ui.botGrid);
@@ -133,17 +172,17 @@
     window.AlhenasReveal?.observe(ui.botGrid);
   };
 
-  const makeDownloadItem = (label, file, meta = 'File ready') => `
+  const makeDownloadItem = (label, file, meta = 'File ready', primary = false) => `
     <div class="download-item">
       <div>
         <span>${label}</span><br />
         <small>${meta}</small>
       </div>
-      <a class="btn-inline ${label === 'Main Character Card' ? 'btn-primary' : ''}" href="${file}" download>
+      <a class="btn-inline ${primary ? 'btn-primary' : ''}" href="${file}" download>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M12 4v10m0 0 4-4m-4 4-4-4M5 19h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
-        Download
+        ${getLocale() === 'ru' ? 'Скачать' : 'Download'}
       </a>
     </div>
   `;
@@ -162,8 +201,15 @@
     lastFocusedElement = document.activeElement;
 
     const downloads = [
-      makeDownloadItem(bot.downloads.main.name, bot.downloads.main.file, 'Primary card export'),
-      ...bot.downloads.lorebooks.map((item) => makeDownloadItem(item.name, item.file, 'Lorebook JSON')),
+      makeDownloadItem(
+        bot.downloads.main.name,
+        bot.downloads.main.file,
+        getLocale() === 'ru' ? 'Основной экспорт карточки' : 'Primary card export',
+        true,
+      ),
+      ...bot.downloads.lorebooks.map((item) =>
+        makeDownloadItem(item.name, item.file, getLocale() === 'ru' ? 'JSON лорбука' : 'Lorebook JSON'),
+      ),
     ].join('');
 
     const alts = bot.alts.length
@@ -179,13 +225,13 @@
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path d="M12 4v10m0 0 4-4m-4 4-4-4M5 19h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
-                  Download
+                  ${getLocale() === 'ru' ? 'Скачать' : 'Download'}
                 </a>
               </article>
             `,
           )
           .join('')
-      : '<p>No alternate prints have been filed for this entry yet.</p>';
+      : `<p>${getLocale() === 'ru' ? 'Для этой записи пока не добавлено альтернативных версий.' : 'No alternate prints have been filed for this entry yet.'}</p>`;
 
     ui.botModalContent.innerHTML = `
       <div class="bot-card-modal__layout">
@@ -201,20 +247,20 @@
           ${renderTagRow(bot.tags)}
           <div class="modal__separator"></div>
           <div class="modal-copy">
-            <h3>Description</h3>
+            <h3>${getLocale() === 'ru' ? 'Описание' : 'Description'}</h3>
             ${renderDescription(bot.description)}
           </div>
         </div>
       </div>
       <div class="modal__separator"></div>
       <section>
-        <h3>Downloads</h3>
+        <h3>${getLocale() === 'ru' ? 'Скачивания' : 'Downloads'}</h3>
         <div style="height: 16px"></div>
         <div class="download-list">${downloads}</div>
       </section>
       <div class="modal__separator"></div>
       <section>
-        <h3>Alt Versions</h3>
+        <h3>${getLocale() === 'ru' ? 'Альтернативные версии' : 'Alt Versions'}</h3>
         <div style="height: 16px"></div>
         <div class="alt-grid">${alts}</div>
       </section>
@@ -234,6 +280,16 @@
     ui.botModalContent.innerHTML = '';
     activeModalBot = null;
     lastFocusedElement?.focus?.();
+  };
+
+  const loadBots = async () => {
+    const locale = getLocale();
+    const source = locale === 'en' ? 'data/bots.en.json' : 'data/bots.json';
+    const response = await fetch(source);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const payload = await response.json();
+    state.bots = payload.bots || [];
+    loadedLocale = locale;
   };
 
   const trapModalFocus = (event) => {
@@ -297,24 +353,33 @@
     document.addEventListener('keydown', trapModalFocus);
 
     try {
-      const response = await fetch('data/bots.json');
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const payload = await response.json();
-      state.bots = payload.bots || [];
+      await loadBots();
       renderFilterGroups();
       renderBots();
     } catch (error) {
-      ui.botCount.textContent = 'Unable to load archive.';
+      ui.botCount.textContent = getLocale() === 'ru' ? 'Не удалось загрузить архив.' : 'Unable to load archive.';
       ui.botGrid.innerHTML = `
         <div class="empty-state" data-reveal>
-          <h3>Archive unavailable</h3>
-          <p>There was a problem loading bots.json. Please check the file paths and try again.</p>
+          <h3>${getLocale() === 'ru' ? 'Архив недоступен' : 'Archive unavailable'}</h3>
+          <p>${getLocale() === 'ru' ? 'Не удалось загрузить bots.json. Проверьте пути к файлам и попробуйте снова.' : 'There was a problem loading bots.json. Please check the file paths and try again.'}</p>
         </div>
       `;
       window.AlhenasReveal?.observe(ui.botGrid);
       console.error(error);
     }
   };
+
+  window.addEventListener('alhenas:languagechange', async () => {
+    if (!ui.botGrid) return;
+    try {
+      if (loadedLocale !== getLocale()) await loadBots();
+      renderFilterGroups();
+      renderBots();
+      if (activeModalBot) openModal(activeModalBot.id);
+    } catch (error) {
+      console.error(error);
+    }
+  });
 
   document.addEventListener('DOMContentLoaded', init);
 })();

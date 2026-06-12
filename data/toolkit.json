@@ -2,30 +2,30 @@
   "categories": [
     {
       "id": "presets",
-      "title": "Presets",
-      "subtitle": "Prompting presets arranged for tone, pacing, and clean scene structure.",
+      "title": "Пресеты",
+      "subtitle": "Пресеты для промптов, выстроенные под тон, ритм и чистую структуру сцены.",
       "icon": "✦",
       "items": [
         {
-          "name": "Velvet Dialogue",
-          "description": "A soft-response preset tuned for descriptive pacing, tactile detail, and cleaner turn endings.",
-          "type": "Preset",
+          "name": "Бархатный диалог",
+          "description": "Мягкий пресет ответа для описательного темпа, тактильных деталей и более аккуратных завершений реплик.",
+          "type": "Пресет",
           "version": "v2.1",
           "download": "assets/toolkit/presets/velvet-dialogue.json",
           "guide": "assets/toolkit/guides/velvet-dialogue-guide.txt"
         },
         {
-          "name": "Paper Lantern Memory",
-          "description": "A context and memory blend for slower stories that need gentle recap cues without overfilling the prompt.",
-          "type": "Preset",
+          "name": "Память бумажного фонаря",
+          "description": "Сочетание контекста и памяти для медленных историй, которым нужны мягкие напоминания без перегрузки промпта.",
+          "type": "Пресет",
           "version": "v1.4",
           "download": "assets/toolkit/presets/paper-lantern-memory.json",
           "guide": "assets/toolkit/guides/paper-lantern-memory-guide.txt"
         },
         {
-          "name": "Low Orbit Minimal",
-          "description": "A stripped-back preset for technical or sci-fi scenes where clarity matters more than flourish.",
-          "type": "Preset",
+          "name": "Низкая орбита, минимум",
+          "description": "Упрощённый пресет для технических и sci-fi сцен, где ясность важнее украшений.",
+          "type": "Пресет",
           "version": "v1.0",
           "download": "assets/toolkit/presets/low-orbit-minimal.json",
           "guide": "assets/toolkit/guides/low-orbit-minimal-guide.txt"
@@ -34,22 +34,22 @@
     },
     {
       "id": "extensions",
-      "title": "Extensions",
-      "subtitle": "Small workflow add-ons and helper packs for everyday use.",
+      "title": "Расширения",
+      "subtitle": "Небольшие надстройки и пакеты-помощники для повседневной работы.",
       "icon": "📦",
       "items": [
         {
-          "name": "Archive Quick Swap",
-          "description": "A lightweight pack of macros and notes for switching presets between scenes without losing cadence.",
-          "type": "Extension",
+          "name": "Быстрый архивный обмен",
+          "description": "Лёгкий набор макросов и заметок для переключения пресетов между сценами без потери ритма.",
+          "type": "Расширение",
           "version": "v0.9",
           "download": "assets/toolkit/extensions/archive-quick-swap.txt",
           "guide": "assets/toolkit/guides/archive-quick-swap-guide.txt"
         },
         {
-          "name": "Constellation Notes Overlay",
-          "description": "A tiny overlay concept for surfacing reminder tags, emotional cues, and story beats at a glance.",
-          "type": "Extension",
+          "name": "Оверлей заметок созвездия",
+          "description": "Небольшая концепция оверлея для показа напоминаний, эмоциональных подсказок и сюжетных опор на одном взгляде.",
+          "type": "Расширение",
           "version": "v1.2",
           "download": "assets/toolkit/extensions/constellation-notes-overlay.txt",
           "guide": "assets/toolkit/guides/constellation-notes-overlay-guide.txt"
@@ -58,21 +58,21 @@
     },
     {
       "id": "regex-scripts",
-      "title": "Regex Scripts",
-      "subtitle": "Cleanup helpers for repetitive formatting, punctuation, and scene markers.",
+      "title": "Regex-скрипты",
+      "subtitle": "Помощники для очистки повторяющегося форматирования, пунктуации и сценических разделителей.",
       "icon": "⌘",
       "items": [
         {
-          "name": "Quote Tidy",
-          "description": "Normalizes quote spacing and catches a few common formatting drifts in imported cards.",
+          "name": "Очистка кавычек",
+          "description": "Нормализует интервалы вокруг кавычек и ловит несколько типичных сбоев форматирования в импортированных карточках.",
           "type": "Regex",
           "version": "v3.0",
           "download": "assets/toolkit/regex/quote-tidy.txt",
           "guide": "assets/toolkit/guides/quote-tidy-guide.txt"
         },
         {
-          "name": "Scene Divider Polish",
-          "description": "Converts inconsistent separators into a clean, readable divider style for logs and exports.",
+          "name": "Полировка разделителей сцен",
+          "description": "Преобразует непоследовательные разделители в чистый и читаемый стиль для логов и экспортов.",
           "type": "Regex",
           "version": "v1.6",
           "download": "assets/toolkit/regex/scene-divider-polish.txt",
@@ -82,22 +82,22 @@
     },
     {
       "id": "miscellaneous",
-      "title": "Miscellaneous",
-      "subtitle": "Loose odds and ends that do not fit anywhere else, but still earn their place.",
+      "title": "Прочее",
+      "subtitle": "Разные мелочи, которые не подходят никуда ещё, но всё равно заслуживают место.",
       "icon": "✎",
       "items": [
         {
-          "name": "Tag Shorthand Pack",
-          "description": "A compact set of shorthand tags for organization, versioning, and quick archive notes.",
-          "type": "Misc",
+          "name": "Пакет кратких тегов",
+          "description": "Компактный набор кратких тегов для организации, версионирования и быстрых заметок архива.",
+          "type": "Разное",
           "version": "v1.1",
           "download": "assets/toolkit/misc/tag-shorthand-pack.txt",
           "guide": "assets/toolkit/guides/tag-shorthand-pack-guide.txt"
         },
         {
-          "name": "Vintage Theme Swatches",
-          "description": "A plain-text palette file with warm paper, sage, amber, and Alhena accent references.",
-          "type": "Misc",
+          "name": "Сэмплы винтажной темы",
+          "description": "Текстовый файл с палитрой тёплой бумаги, шалфея, янтаря и акцентов Alhena.",
+          "type": "Разное",
           "version": "v1.0",
           "download": "assets/toolkit/misc/vintage-theme-swatches.txt",
           "guide": "assets/toolkit/guides/vintage-theme-swatches-guide.txt"
@@ -107,23 +107,23 @@
   ],
   "tutorials": {
     "id": "tutorials",
-    "title": "Tutorials / Guides",
-    "subtitle": "Practical notes for keeping scenes expressive, readable, and easy to maintain.",
+    "title": "Руководства / гайды",
+    "subtitle": "Практичные заметки о том, как делать сцены выразительными, читаемыми и удобными для поддержки.",
     "items": [
       {
-        "title": "Balancing style and memory budget",
-        "summary": "Keep atmosphere without crowding the context window.",
-        "content": "Start by deciding which details must repeat and which only need to appear once. Signature tone belongs in the preset; one-off flavor should stay in the card or opening message.\n\n- Keep reusable style cues short and portable.\n- Move world trivia into lorebooks instead of the main prompt.\n- Reserve long prose for openings, not every generation."
+        "title": "Баланс стиля и бюджета памяти",
+        "summary": "Сохраните атмосферу, не забивая окно контекста.",
+        "content": "Сначала решите, какие детали должны повторяться, а какие достаточно упомянуть один раз. Фирменный тон должен жить в пресете; единоразовый вкус лучше оставлять в карточке или стартовом сообщении.\n\n- Кратко формулируйте переиспользуемые стилистические подсказки.\n- Переносите мировые факты в лорбуки, а не в основной промпт.\n- Длинную прозу оставляйте для завязки, а не для каждой генерации."
       },
       {
-        "title": "When to split a lorebook",
-        "summary": "A simple rule for separating world notes from character notes.",
-        "content": "If the entry can apply to more than one character, it probably belongs in a world lorebook. If it changes how a specific character speaks, reacts, or remembers, keep it attached to the character set.\n\n- Worldbook: places, factions, broad customs.\n- Character book: habits, private history, personal vocabulary.\n- Shared duos: make a mini companion file for cross-cues."
+        "title": "Когда делить лорбук",
+        "summary": "Простое правило для разделения мировых и персонажных заметок.",
+        "content": "Если запись может подойти нескольким персонажам, ей, вероятно, место в общем мировом лорбуке. Если она меняет речь, реакцию или память конкретного персонажа, лучше держать её рядом с его набором.\n\n- Мир: места, фракции, широкие обычаи.\n- Персонажный лорбук: привычки, личная история, личный словарь.\n- Общие дуэты: сделайте мини-файл для перекрёстных подсказок."
       },
       {
-        "title": "Soft formatting for exported logs",
-        "summary": "Improve readability without making transcripts feel mechanical.",
-        "content": "Aim for consistency, not perfection. Use one divider style, one quote style, and one note style across the whole archive so logs feel collected rather than generated.\n\nA light left border works well for commentary. Short hand-labeled dates, version notes, and tags also make future edits much easier."
+        "title": "Мягкое форматирование экспортов",
+        "summary": "Улучшайте читаемость, не делая транскрипты механическими.",
+        "content": "Старайтесь за последовательностью, а не за идеальной правильностью. Используйте один стиль разделителей, одну систему кавычек и один формат заметок по всему архиву, чтобы логи ощущались собранными, а не сгенерированными.\n\nЛёгкая левая граница хорошо работает для комментариев. Короткие даты, пометки версий и теги тоже сильно упрощают будущие правки."
       }
     ]
   }
