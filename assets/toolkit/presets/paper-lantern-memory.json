@@ -1,0 +1,5 @@
+{
+  "name": "Paper Lantern Memory",
+  "description": "Prompt memory preset with recap cues and clean scene continuity.",
+  "memory_blocks": ["recent beat", "tone anchor", "open thread"]
+}

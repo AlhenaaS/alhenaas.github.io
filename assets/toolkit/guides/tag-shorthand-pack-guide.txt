@@ -1,0 +1,2 @@
+Adopt a short stable tag system early.
+It makes later searching and version tracking much easier.

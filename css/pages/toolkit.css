@@ -1,0 +1,40 @@
+.toolkit-shell {
+  padding-bottom: var(--space-3xl);
+}
+
+.toolkit-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-2xl);
+}
+
+.toolkit-section {
+  padding-top: var(--space-lg);
+  scroll-margin-top: calc(var(--header-height) + 24px);
+}
+
+.toolkit-section + .toolkit-section {
+  margin-top: var(--space-3xl);
+}
+
+.toolkit-section__header {
+  margin-bottom: var(--space-lg);
+}
+
+.toolkit-section__header p {
+  margin-top: var(--space-xs);
+}
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-lg);
+}
+
+.tutorial-summary {
+  color: var(--text-tertiary);
+  font-size: var(--fs-small);
+  margin-top: var(--space-xs);
+}

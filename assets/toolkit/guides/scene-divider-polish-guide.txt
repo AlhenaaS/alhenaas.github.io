@@ -1,0 +1,2 @@
+Useful when logs contain multiple divider styles.
+Apply once, then export for easier reading.

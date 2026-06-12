@@ -1,0 +1,251 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text-primary);
+  background:
+    radial-gradient(circle at 12% 18%, var(--spotlight-a), transparent 22%),
+    radial-gradient(circle at 84% 10%, var(--spotlight-b), transparent 18%),
+    radial-gradient(circle at 78% 74%, var(--spotlight-a), transparent 24%),
+    var(--bg-primary);
+  transition: var(--transition-theme);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: var(--noise-pattern);
+  background-size: 140px 140px;
+  opacity: var(--noise-opacity);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--blotch-opacity);
+  background:
+    radial-gradient(circle at 25% 30%, rgba(196, 149, 106, 0.38), transparent 20%),
+    radial-gradient(circle at 75% 76%, rgba(196, 91, 74, 0.24), transparent 18%);
+  z-index: -1;
+}
+
+body.modal-open,
+body.menu-open {
+  overflow: hidden;
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: var(--font-heading);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--fs-h1);
+}
+
+h2 {
+  font-size: var(--fs-h2);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+}
+
+p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+strong,
+b {
+  font-weight: 500;
+}
+
+small {
+  font-size: var(--fs-small);
+}
+
+code,
+pre {
+  font-family: var(--font-mono);
+}
+
+pre {
+  overflow-x: auto;
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-card);
+}
+
+::selection {
+  background: rgba(196, 91, 74, 0.18);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+main {
+  position: relative;
+  isolation: isolate;
+}
+
+section {
+  position: relative;
+}
+
+[data-reveal] {
+  --reveal-opacity: 0;
+  --reveal-y: 20px;
+  --card-scale: 1;
+  opacity: var(--reveal-opacity);
+  transform: translateY(var(--reveal-y)) rotate(var(--card-rotate, 0deg)) scale(var(--card-scale));
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-reveal].is-visible {
+  --reveal-opacity: 1;
+  --reveal-y: 0px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.text-accent {
+  color: var(--accent-primary);
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.section-heading p {
+  margin-top: var(--space-sm);
+  max-width: 60ch;
+  margin-inline: auto;
+}
+
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  color: var(--text-tertiary);
+  margin: var(--space-3xl) auto;
+  max-width: 420px;
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+}
+
+.section-divider span {
+  font-size: 0.875rem;
+  letter-spacing: 0.18em;
+}
+
+.quote-note {
+  padding-left: var(--space-md);
+  border-left: 3px solid var(--accent-primary);
+  color: var(--text-secondary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

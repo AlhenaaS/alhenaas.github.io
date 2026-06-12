@@ -1,0 +1,9 @@
+Tag shorthand pack
+==================
+
+[rev]
+[soft]
+[nsfw]
+[duo]
+[alt]
+[field]
