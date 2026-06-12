@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
+import { siteContent, type Lang, type TavernTab } from '../content/siteContent';
 
 interface TavernItem {
   id: string;
@@ -22,17 +23,14 @@ interface TavernData {
   other: TavernItem[];
 }
 
-type TabKey = 'presets' | 'extensions' | 'regex' | 'tutorials' | 'other';
+type TabKey = TavernTab;
 
-const TAB_ICONS: Record<TabKey, string> = {
-  presets: '⚙',
-  extensions: '🔌',
-  regex: '{ }',
-  tutorials: '📖',
-  other: '✦',
-};
+const TAB_ICONS = Object.fromEntries(
+  siteContent.tavern.tabs.map(tab => [tab.key, tab.icon])
+) as Record<TabKey, string>;
+const DEFAULT_TAB = siteContent.tavern.tabs[0].key;
 
-function TavernCard({ item, lang, t, tabKey }: { item: TavernItem; lang: 'ru' | 'en'; t: any; tabKey: TabKey }) {
+function TavernCard({ item, lang, t, tabKey }: { item: TavernItem; lang: Lang; t: any; tabKey: TabKey }) {
   return (
     <div className="tavern-card polaroid polaroid-tavern">
       <div className="tavern-card-inner">
@@ -69,22 +67,19 @@ function TavernCard({ item, lang, t, tabKey }: { item: TavernItem; lang: 'ru' | 
 export default function Tavern() {
   const { t, lang } = useApp();
   const [data, setData] = useState<TavernData | null>(null);
-  const [activeTab, setActiveTab] = useState<TabKey>('presets');
+  const [activeTab, setActiveTab] = useState<TabKey>(DEFAULT_TAB);
 
   useEffect(() => {
-    fetch('./data/tavern.json')
+    fetch(siteContent.data.tavern)
       .then(r => r.json())
       .then(setData)
       .catch(() => setData(null));
   }, []);
 
-  const tabs: { key: TabKey; label: string }[] = [
-    { key: 'presets', label: t.tavern.presets },
-    { key: 'extensions', label: t.tavern.extensions },
-    { key: 'regex', label: t.tavern.regex },
-    { key: 'tutorials', label: t.tavern.tutorials },
-    { key: 'other', label: t.tavern.other },
-  ];
+  const tabs = siteContent.tavern.tabs.map(tab => ({
+    key: tab.key,
+    label: t.tavern[tab.labelKey],
+  }));
 
   const currentItems = data ? data[activeTab] : [];
 
@@ -120,7 +115,7 @@ export default function Tavern() {
             />
           ))
         ) : (
-          <div className="no-results">— пусто —</div>
+          <div className="no-results">{siteContent.tavern.emptyText}</div>
         )}
       </div>
     </main>

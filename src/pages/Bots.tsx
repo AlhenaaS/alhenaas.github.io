@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
+import { siteContent, type Lang } from '../content/siteContent';
 
 interface Lorebook {
   name: string;
@@ -37,7 +38,7 @@ interface Bot {
 
 interface AltModalProps {
   alt: Alt;
-  lang: 'ru' | 'en';
+  lang: Lang;
   t: any;
   onClose: () => void;
 }
@@ -83,7 +84,7 @@ function AltModal({ alt, lang, t, onClose }: AltModalProps) {
 
 interface BotModalProps {
   bot: Bot;
-  lang: 'ru' | 'en';
+  lang: Lang;
   t: any;
   onClose: () => void;
 }
@@ -210,7 +211,7 @@ export default function Bots() {
   const [selectedBot, setSelectedBot] = useState<Bot | null>(null);
 
   useEffect(() => {
-    fetch('./data/bots.json')
+    fetch(siteContent.data.bots)
       .then(r => r.json())
       .then(setBots)
       .catch(() => setBots([]));
@@ -232,11 +233,10 @@ export default function Bots() {
     return true;
   });
 
-  const genderOptions = [
-    { value: lang === 'ru' ? 'мужской' : 'male', label: t.bots.male },
-    { value: lang === 'ru' ? 'женский' : 'female', label: t.bots.female },
-    { value: lang === 'ru' ? 'небинарный' : 'nonbinary', label: t.bots.nonbinary },
-  ];
+  const genderOptions = siteContent.bots.genders.map(gender => ({
+    value: gender.value[lang],
+    label: t.bots[gender.labelKey],
+  }));
 
   return (
     <main className="bots-page">
@@ -312,7 +312,7 @@ export default function Bots() {
                   </div>
                 )}
                 {bot.alts && bot.alts.length > 0 && (
-                  <div className="alt-badge">alt ×{bot.alts.length}</div>
+                  <div className="alt-badge">{siteContent.bots.altBadgePrefix}{bot.alts.length}</div>
                 )}
               </div>
               <div className="polaroid-caption">

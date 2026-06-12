@@ -1,11 +1,5 @@
 import { useApp } from '../context/AppContext';
-
-const SOCIAL_LINKS = [
-  { label: 'Telegram', url: 'https://t.me/alhenas', icon: 'tg' },
-  { label: 'Boosty', url: 'https://boosty.to/alhenas', icon: 'boosty' },
-  { label: 'Chub.ai', url: 'https://chub.ai/alhenas', icon: 'chub' },
-  { label: 'GitHub', url: 'https://github.com/alhenas', icon: 'gh' },
-];
+import { siteContent } from '../content/siteContent';
 
 function SocialIcon({ icon }: { icon: string }) {
   if (icon === 'tg') return (
@@ -54,7 +48,7 @@ export default function Footer() {
         </div>
         <div className="footer-links">
           <span className="footer-links-label">{t.footer.links}:</span>
-          {SOCIAL_LINKS.map(link => (
+          {siteContent.socialLinks.map(link => (
             <a
               key={link.icon}
               href={link.url}
@@ -68,7 +62,7 @@ export default function Footer() {
           ))}
         </div>
         <div className="footer-copy">
-          © 2025 alhenas · {t.footer.rights}
+          © {siteContent.brand.year} {siteContent.brand.name} · {t.footer.rights}
         </div>
       </div>
     </footer>

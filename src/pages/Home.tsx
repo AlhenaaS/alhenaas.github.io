@@ -1,17 +1,9 @@
 import { useApp } from '../context/AppContext';
-
-type Page = 'home' | 'bots' | 'tavern';
+import { siteContent, type Page } from '../content/siteContent';
 
 interface HomeProps {
   setPage: (page: Page) => void;
 }
-
-const SOCIAL_LINKS = [
-  { label: 'Telegram', url: 'https://t.me/alhenas', color: '#229ED9' },
-  { label: 'Boosty', url: 'https://boosty.to/alhenas', color: '#f15f2b' },
-  { label: 'Chub.ai', url: 'https://chub.ai/alhenas', color: '#9b6fa6' },
-  { label: 'GitHub', url: 'https://github.com/alhenas', color: '#333' },
-];
 
 export default function Home({ setPage }: HomeProps) {
   const { t } = useApp();
@@ -48,9 +40,9 @@ export default function Home({ setPage }: HomeProps) {
           </svg>
         </div>
 
-        <div className="hero-content">
-          <p className="hero-greeting">{t.home.greeting}</p>
-          <h1 className="hero-title">alhenas</h1>
+          <div className="hero-content">
+            <p className="hero-greeting">{t.home.greeting}</p>
+          <h1 className="hero-title">{siteContent.brand.name}</h1>
           <p className="hero-subtitle">{t.home.subtitle}</p>
           <div className="hero-buttons">
             <button className="btn-primary" onClick={() => setPage('bots')}>
@@ -87,7 +79,7 @@ export default function Home({ setPage }: HomeProps) {
           </div>
           <div className="polaroid-caption">
             <p className="about-text">{t.home.about}</p>
-            <span className="polaroid-label">alhenas, 2025</span>
+            <span className="polaroid-label">{siteContent.home.aboutCaption}</span>
           </div>
         </div>
       </section>
@@ -95,7 +87,7 @@ export default function Home({ setPage }: HomeProps) {
       {/* Social links polaroids */}
       <section className="socials-section">
         <div className="socials-grid">
-          {SOCIAL_LINKS.map((link, i) => (
+          {siteContent.socialLinks.map((link, i) => (
             <a
               key={link.label}
               href={link.url}
