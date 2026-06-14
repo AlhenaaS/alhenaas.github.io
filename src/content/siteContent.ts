@@ -26,7 +26,7 @@ export const siteContent = {
 
   images: {
     placeholders: {
-      about: './images/placeholders/about.svg',
+      about: './images/about.png',
       bot: './images/placeholders/image.svg',
       modal: './images/placeholders/image.svg',
       altMini: './images/placeholders/image.svg',
