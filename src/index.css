@@ -425,6 +425,8 @@ body::before {
   max-width: 360px;
   width: 100%;
   cursor: default;
+  padding: 0;
+  overflow: hidden;
 }
 
 .polaroid-about:hover {
@@ -449,6 +451,10 @@ body::before {
   object-fit: contain;
   filter: none;
   opacity: 0.68;
+}
+
+.polaroid-about .polaroid-caption {
+  padding: 10px 14px 18px;
 }
 
 .about-text {
